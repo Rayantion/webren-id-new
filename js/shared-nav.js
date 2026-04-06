@@ -67,7 +67,7 @@
   ${!isDemo ? `<a href="${base}portal/" data-nav-key="portal">Portal</a>` : ''}
   <div class="mobile-menu-lang">
     <button class="lang-btn${savedLang === 'en' ? ' active' : ''}" data-lang="en" aria-label="Switch to English">EN</button>
-    <button class="lang-btn${savedLang !== 'en' ? ' active' : ''}" data-lang="zh-TW" aria-label="Switch to Traditional Chinese">中文</button>
+    <button class="lang-btn${savedLang !== 'en' ? ' active' : ''}" data-lang="zh-CN" aria-label="Switch to Simplified Chinese">中文</button>
   </div>
 </nav>
 <div id="shared-menu-overlay"></div>`;

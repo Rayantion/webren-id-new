@@ -488,7 +488,7 @@
         cta_p: 'Create your agent account now. It takes 2 minutes and costs nothing.',
         cta_btn: 'Register on the Portal \u2192'
       },
-      'zh-TW': {
+      'zh-CN': {
         badge: '\u4ee3\u7406\u8a08\u756b \u2014 \u73fe\u5728\u958b\u653e',
         hero_h1: '\u5c07\u4eba\u8108\u8f49\u5316\u70ba <span style="background:linear-gradient(135deg,#0D9488 0%,#34D399 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">\u88ab\u52d5\u6536\u5165</span>',
         hero_p: '\u5c07\u4f01\u696d\u4ecb\u7d39\u7d66 Web\u4eba\uff0c\u6bcf\u6708\u7372\u5f9715%\u4f63\u91d1\u2014\u53ea\u8981\u4ed6\u5011\u7e7c\u7e8c\u5c31\u4e0d\u6703\u505c\u3002\u4e0d\u9700\u4efb\u4f55\u6280\u8853\u80cc\u666f\u3002',
@@ -557,8 +557,8 @@
 
     function applyStrings(lang) {
       var s = STRINGS[lang] || STRINGS['en'];
-      document.documentElement.lang = lang === 'zh-TW' ? 'zh-TW' : 'en';
-      document.body.classList.toggle('lang-zh', lang === 'zh-TW');
+      document.documentElement.lang = lang === 'zh-CN' ? 'zh-CN' : 'en';
+      document.body.classList.toggle('lang-zh', lang === 'zh-CN');
       document.querySelectorAll('[data-i18n]').forEach(function (el) {
         var key = el.getAttribute('data-i18n');
         if (s[key] !== undefined) el[iH] = s[key];

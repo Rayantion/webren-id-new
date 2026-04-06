@@ -882,7 +882,7 @@ const STRINGS = {
     "sneak.subtext": "For current Option A clients — seamless upgrade available",
     "sneak.cta": "Coming 2026"
   },
-  "zh-TW": {
+  "zh-CN": {
     "nav.home": "首頁", "nav.services": "服務", "nav.pricing": "定價",
     "nav.demo": "試用", "nav.contact": "聯絡",
     "pricing.badge": "透明定價",
@@ -979,8 +979,8 @@ let currentLang = 'en';
 
 function applyStrings(lang) {
   currentLang = lang;
-  document.documentElement.lang = lang === 'zh-TW' ? 'zh-TW' : 'en';
-  document.body.classList.toggle('lang-zh', lang === 'zh-TW');
+  document.documentElement.lang = lang === 'zh-CN' ? 'zh-CN' : 'en';
+  document.body.classList.toggle('lang-zh', lang === 'zh-CN');
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     const val = STRINGS[lang]?.[key];
@@ -1020,7 +1020,7 @@ function initReveal() {
 
 // Init
 const urlLang = new URLSearchParams(location.search).get('lang');
-const savedLang = localStorage.getItem('webren_lang') || (urlLang === 'zh-TW' ? 'zh-TW' : 'en');
+const savedLang = localStorage.getItem('webren_lang') || (urlLang === 'zh-CN' ? 'zh-CN' : 'en');
 applyStrings(savedLang);
 document.addEventListener('DOMContentLoaded', initReveal);
 // Handle lang switch from shared outer nav

@@ -269,12 +269,12 @@
   // Language switch
   document.addEventListener('nav:lang', function (e) {
     var lang = e.detail;
-    document.documentElement.lang = lang === 'zh-TW' ? 'zh-TW' : 'en';
-    document.body.classList.toggle('lang-zh', lang === 'zh-TW');
+    document.documentElement.lang = lang === 'zh-CN' ? 'zh-CN' : 'en';
+    document.body.classList.toggle('lang-zh', lang === 'zh-CN');
   });
   var _sl = localStorage.getItem('webren_lang') || 'en';
-  document.documentElement.lang = _sl === 'zh-TW' ? 'zh-TW' : 'en';
-  document.body.classList.toggle('lang-zh', _sl === 'zh-TW');
+  document.documentElement.lang = _sl === 'zh-CN' ? 'zh-CN' : 'en';
+  document.body.classList.toggle('lang-zh', _sl === 'zh-CN');
 </script>
 </body>
 </html>
