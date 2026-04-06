@@ -3,7 +3,7 @@
 
 const I18N = (() => {
   let currentLang = 'en';
-  const supportedLangs = ['en', 'zh-TW'];
+  const supportedLangs = ['en', 'zh-CN'];
   const cache = {};
 
   async function loadLocale(lang) {
@@ -61,7 +61,7 @@ const I18N = (() => {
     });
 
     // Update font class for CJK
-    document.body.classList.toggle('lang-zh', lang === 'zh-TW');
+    document.body.classList.toggle('lang-zh', lang === 'zh-CN');
 
     if (overlay) {
       setTimeout(() => overlay.classList.remove('active'), 50); // trigger slide-back-up
@@ -70,7 +70,7 @@ const I18N = (() => {
 
   function detectLang() {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    return tz && tz.includes('Taipei') ? 'zh-TW' : 'en';
+    return tz && tz.includes('Jakarta') ? 'zh-CN' : 'en';
   }
 
   async function init() {

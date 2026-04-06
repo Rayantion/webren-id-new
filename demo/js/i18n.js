@@ -5,9 +5,9 @@ const I18N = (() => {
   async function init() {
     const urlLang = new URLSearchParams(location.search).get('lang');
     const saved = urlLang || localStorage.getItem(STORAGE_KEY) || 'en';
-    const [en, zhTW] = await Promise.all([
+    const [en, zhCN] = await Promise.all([
       fetch('locales/en.json').then(r => r.json()),
-      fetch('locales/zh-TW.json').then(r => r.json())
+      fetch('locales/zh-CN.json').then(r => r.json())
     ]);
 
     await i18next.init({
@@ -15,7 +15,7 @@ const I18N = (() => {
       fallbackLng: 'en',
       resources: {
         en: { translation: en },
-        'zh-TW': { translation: zhTW }
+        'zh-CN': { translation: zhCN }
       }
     });
 
@@ -33,7 +33,7 @@ const I18N = (() => {
       const val = i18next.t(el.dataset.i18nPlaceholder);
       if (val !== el.dataset.i18nPlaceholder) el.placeholder = val;
     });
-    document.documentElement.lang = i18next.language === 'zh-TW' ? 'zh-TW' : 'en';
+    document.documentElement.lang = i18next.language === 'zh-CN' ? 'zh-CN' : 'en';
   }
 
   async function switchLanguage(lang) {

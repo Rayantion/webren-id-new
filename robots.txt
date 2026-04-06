@@ -20,4 +20,4 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 
-Sitemap: https://webren.dev/sitemap.xml
+Sitemap: https://id.webren.net/sitemap.xml

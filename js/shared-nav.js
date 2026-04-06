@@ -19,7 +19,7 @@
   // ── Nav link translations ─────────────────────────────────────────────
   const NAV_TEXT = {
     en:      { home: 'Home', pricing: 'Pricing', features: 'Features', contact: 'Contact', demo: 'Demo', join: 'Join Us', portal: 'Portal', tagline: 'Built with clean code & attention to detail.', privacy: 'Privacy Policy', copyright: '\u00a9 ' + new Date().getFullYear() + ' Webren. All rights reserved.' },
-    'zh-TW': { home: '\u9996\u9801', pricing: '\u50f9\u683c\u65b9\u6848', features: '\u529f\u80fd\u7279\u8272', contact: '\u806f\u7d61\u6211\u5011', demo: '\u793a\u7bc4', join: '\u52a0\u5165\u6211\u5011', portal: '\u4ee3\u7406\u5f8c\u53f0', tagline: '\u4ee5\u7cbe\u7c21\u7a0b\u5f0f\u78bc\u8207\u7d30\u7bc0\u6253\u9020\u3002', privacy: '\u96b1\u79c1\u653f\u7b56', copyright: '\u00a9 ' + new Date().getFullYear() + ' Web\u4eba\u3002\u4fdd\u7559\u6240\u6709\u6b0a\u5229\u3002' }
+    'zh-CN': { home: '\u9996\u9801', pricing: '\u50f9\u683c\u65b9\u6848', features: '\u529f\u80fd\u7279\u8272', contact: '\u806f\u7d61\u6211\u5011', demo: '\u793a\u7bc4', join: '\u52a0\u5165\u6211\u5011', portal: '\u4ee3\u7406\u5f8c\u53f0', tagline: '\u4ee5\u7cbe\u7c21\u7a0b\u5f0f\u78bc\u8207\u7d30\u7bc0\u6253\u9020\u3002', privacy: '\u96b1\u79c1\u653f\u7b56', copyright: '\u00a9 ' + new Date().getFullYear() + ' Web\u4eba\u3002\u4fdd\u7559\u6240\u6709\u6b0a\u5229\u3002' }
   };
 
   // ── Nav HTML ─────────────────────────────────────────────────────────
@@ -42,7 +42,7 @@
     <div class="nav-right">
       <div class="lang-toggle">
         <button class="lang-btn${savedLang === 'en' ? ' active' : ''}" data-lang="en" aria-label="Switch to English">EN</button>
-        <button class="lang-btn${savedLang !== 'en' ? ' active' : ''}" data-lang="zh-TW" aria-label="Switch to Traditional Chinese">中文</button>
+        <button class="lang-btn${savedLang !== 'en' ? ' active' : ''}" data-lang="zh-CN" aria-label="Switch to Simplified Chinese">中文</button>
       </div>
       <a href="https://wa.me/6285183005811" class="btn-cta-sm" target="_blank" rel="noopener noreferrer">
         WhatsApp ↗

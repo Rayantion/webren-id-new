@@ -2,10 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://rayantion26.github.io/webren/demo/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://rayantion26.github.io/webren/demo/"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://rayantion26.github.io/webren/demo/?lang=zh-TW"/>
+    <loc>https://id.webren.net/demo/</loc>
+    <lastmod>2026-04-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://id.webren.net/demo/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://id.webren.net/demo/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://id.webren.net/demo/?lang=zh-CN"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://id.webren.net/demo/"/>
   </url>
 </urlset>

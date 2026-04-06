@@ -1,0 +1,264 @@
+{
+  "nav": {
+    "home": "首页",
+    "services": "服务",
+    "menu": "菜单",
+    "products": "产品",
+    "about": "关于",
+    "gallery": "图库",
+    "contact": "联系",
+    "back_to_main": "← 返回网站"
+  },
+  "hero": {
+    "badge": "由 Web人 提供支持",
+    "company": {
+      "title": "打造能够",
+      "highlight": "脱颖而出的品牌",
+      "subtitle": "为增长、SEO和全球受众而生的专业网络形象。"
+    },
+    "restaurant": {
+      "title": "每一次品尝",
+      "highlight": "都是独特体验",
+      "subtitle": "温暖现代的餐厅体验——预订、菜单和您的故事，尽在一处。"
+    },
+    "store": {
+      "title": "选购最新",
+      "highlight": "精选系列",
+      "subtitle": "以快速配送和卓越服务发现我们的精选产品。"
+    },
+    "cta_primary": "立即开始",
+    "cta_secondary": "了解更多"
+  },
+  "company": {
+    "services": {
+      "badge": "我们的服务",
+      "title": "我们的服务",
+      "subtitle": "您的业务在网上发展所需的一切。",
+      "item_1_title": "网页设计",
+      "item_1_desc": "为您品牌打造的现代响应式网站。",
+      "item_2_title": "SEO 优化",
+      "item_2_desc": "排名更高，吸引更多访客，更快增长。",
+      "item_3_title": "数字营销",
+      "item_3_desc": "在正确的时间触及正确的受众。"
+    },
+    "about": {
+      "badge": "我们的故事",
+      "title": "我们是谁",
+      "body": "我们是一支致力于提供卓越数字体验的团队。凭借多年的专业知识，我们帮助各种规模的企业建立强大的在线形象。"
+    },
+    "gallery": {
+      "badge": "我们的作品",
+      "title": "图库"
+    },
+    "features": {
+      "badge": "为何选择我们",
+      "title": "与众不同",
+      "item_1_title": "快速可靠",
+      "item_1_desc": "为性能和99.9%正常运行时间而优化。",
+      "item_2_title": "移动优先",
+      "item_2_desc": "在每个屏幕、每个设备上都看起来很棒。",
+      "item_3_title": "SEO就绪",
+      "item_3_desc": "从基础开始为搜索引擎而建。"
+    }
+  },
+  "catalog": {
+    "sort_relevance": "相关性",
+    "sort_price_asc": "价格：从低到高",
+    "sort_price_desc": "价格：从高到低"
+  },
+  "restaurant": {
+    "feature": {
+      "badge": "我们的氛围",
+      "title": "用餐体验",
+      "desc": "为各种场合打造的温馨宜人空间——从家庭聚餐到特别庆典。"
+    },
+    "full_menu": {
+      "title": "完整菜单",
+      "view_all": "查看完整菜单 →",
+      "search_placeholder": "搜索菜品…",
+      "cat_all": "全部",
+      "cat_main": "主菜",
+      "cat_dessert": "甜点",
+      "cat_sides": "配菜",
+      "sub_all": "全部",
+      "sub_rice": "米饭",
+      "sub_noodle": "面条",
+      "sub_mifen": "米线"
+    },
+    "menu": {
+      "badge": "我们的菜单",
+      "title": "今日精选",
+      "subtitle": "新鲜食材，精心制作。",
+      "cat_1": "开胃菜",
+      "cat_2": "主菜",
+      "cat_3": "甜点",
+      "item_1_name": "田园沙拉",
+      "item_1_desc": "新鲜时令蔬菜，樱桃番茄，自制沙拉酱",
+      "item_1_price": "Rp 35.000",
+      "item_2_name": "酥炸鱿鱼",
+      "item_2_desc": "轻裹面粉，配柠檬蒜泥蛋黄酱",
+      "item_2_price": "Rp 48.000",
+      "item_3_name": "烤三文鱼",
+      "item_3_desc": "大西洋三文鱼，烤蔬菜，香草黄油",
+      "item_3_price": "Rp 95.000",
+      "item_4_name": "牛里脊",
+      "item_4_desc": "200克，三分熟，红酒汁",
+      "item_4_price": "Rp 135.000",
+      "item_5_name": "熔岩巧克力",
+      "item_5_desc": "温热巧克力蛋糕，香草冰淇淋",
+      "item_5_price": "Rp 32.000",
+      "item_6_name": "焦糖布丁",
+      "item_6_desc": "经典法式奶油冻，焦糖表面",
+      "item_6_price": "Rp 30.000"
+    },
+    "about": {
+      "badge": "我们的故事",
+      "title": "风味传统",
+      "body": "自2018年成立以来，我们以热情和奉献服务社区。每道菜都讲述了精心挑选的食材和久经考验的食谱的故事。"
+    },
+    "hours": {
+      "badge": "找到我们",
+      "title": "营业时间与地址",
+      "mon_fri": "周一至周五",
+      "mon_fri_hours": "11:30 – 22:00",
+      "sat_sun": "周六至周日",
+      "sat_sun_hours": "10:00 – 23:00",
+      "address": "123示范街，雅加达南区",
+      "phone": "+62 21 1234 5678"
+    }
+  },
+  "store": {
+    "full_products": {
+      "title": "所有产品",
+      "view_all": "查看所有产品 →",
+      "search_placeholder": "搜索产品…",
+      "cat_all": "全部",
+      "cat_apparel": "服装",
+      "cat_accessories": "配饰",
+      "cat_home": "家居生活",
+      "cat_gifts": "礼品"
+    },
+    "featured": {
+      "badge": "新品到货",
+      "title": "精选产品",
+      "subtitle": "精心挑选，只为您。",
+      "item_1_name": "经典T恤",
+      "item_1_desc": "100%有机棉，8色可选",
+      "item_1_price": "Rp 118.000",
+      "item_2_name": "帆布托特包",
+      "item_2_desc": "耐用、宽敞、时尚",
+      "item_2_price": "Rp 76.000",
+      "item_3_name": "陶瓷马克杯",
+      "item_3_desc": "手工制作，洗碗机安全，350毫升",
+      "item_3_price": "Rp 64.000",
+      "add_to_cart": "加入购物车"
+    },
+    "categories": {
+      "badge": "分类选购",
+      "title": "分类",
+      "cat_1": "服装",
+      "cat_2": "配饰",
+      "cat_3": "家居生活",
+      "cat_4": "礼品"
+    },
+    "about": {
+      "badge": "我们的品牌",
+      "title": "为目标而造",
+      "body": "我们店里的每件产品都经过精心设计和可持续采购。我们相信质量优于数量——每件产品都经久耐用，带来真正的快乐。"
+    }
+  },
+  "contact": {
+    "badge": "联系我们",
+    "title": "准备好开始了吗？",
+    "subtitle": "联系我们，我们将在24小时内回复。",
+    "name_label": "全名",
+    "email_label": "电子邮箱",
+    "message_label": "留言",
+    "submit": "发送消息",
+    "success": "消息已发送！我们将尽快与您联系。",
+    "error_required": "此字段为必填项。",
+    "error_email": "请输入有效的电子邮箱地址。"
+  },
+  "footer": {
+    "tagline": "这是 Web人 的演示网站。",
+    "copyright": "© 2025 Web人. 版权所有。",
+    "counter_today": "今日",
+    "counter_yesterday": "昨日",
+    "counter_lastmonth": "上月",
+    "counter_total": "总计"
+  },
+  "demo_nav": {
+    "brand": "您的品牌"
+  },
+  "demo_bar": {
+    "company": "企业",
+    "restaurant": "餐厅",
+    "store": "商店",
+    "hint": "点击下方自定义 ↓"
+  },
+  "marquee": {
+    "item1": "定制网站",
+    "item2": "快速交付",
+    "item3": "移动端友好",
+    "item4": "SEO就绪",
+    "item5": "双语支持",
+    "item6": "Google表单集成",
+    "item7": "实时访问计数器",
+    "item8": "企业邮箱"
+  },
+  "configurator": {
+    "preset_label": "快速主题",
+    "button": "自定义",
+    "title": "自定义您的网站",
+    "mode_label": "业务类型",
+    "mode_company": "企业",
+    "mode_restaurant": "餐厅",
+    "mode_store": "商店",
+    "theme_label": "主题颜色",
+    "color_primary": "主色",
+    "color_accent": "强调色",
+    "color_bg": "背景",
+    "color_text": "文字",
+    "auto_theme": "自动主题",
+    "fonts_label": "字体",
+    "font_heading": "标题字体",
+    "font_body": "正文字体",
+    "bg_label": "背景",
+    "lang_label": "语言",
+    "contact_label": "您的详情",
+    "name_placeholder": "全名",
+    "email_placeholder": "电子邮箱",
+    "phone_placeholder": "电话号码",
+    "codename_placeholder": "代理商代码（由您的代理商提供）",
+    "send": "发送给 Web人",
+    "sending": "发送中...",
+    "success": "已发送！您的代理商将尽快与您联系。",
+    "error": "出现问题，请重试。",
+    "error_codename": "未找到代理商代码，请联系您的代理商。",
+    "back": "返回",
+    "bg_particles": "粒子",
+    "bg_waves": "波浪",
+    "bg_grid": "网格",
+    "bg_blobs": "光斑",
+    "bg_none": "无",
+    "bg_stars": "星空",
+    "bg_geometric": "几何",
+    "bg_ripple": "涟漪",
+    "bg_fireflies": "萤火虫",
+    "bg_aurora": "极光",
+    "preset_ivory": "象牙",
+    "preset_midnight": "午夜",
+    "preset_ocean": "海洋",
+    "preset_forest": "森林",
+    "preset_sunset": "日落",
+    "preset_rose": "玫瑰",
+    "preset_arctic": "北极",
+    "preset_obsidian": "黑曜石",
+    "preset_amethyst": "紫水晶",
+    "preset_marigold": "万寿菊",
+    "error_name": "姓名至少2个字符。",
+    "error_email_invalid": "请输入有效的电子邮箱地址。",
+    "error_phone": "电话号码至少需要8位数字。",
+    "error_codename_required": "代理商代码为必填项。"
+  }
+}

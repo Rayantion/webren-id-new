@@ -1,0 +1,264 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "services": "Layanan",
+    "menu": "Menu",
+    "products": "Produk",
+    "about": "Tentang",
+    "gallery": "Galeri",
+    "contact": "Kontak",
+    "back_to_main": "← Kembali ke Website"
+  },
+  "hero": {
+    "badge": "Didukung oleh Web人",
+    "company": {
+      "title": "Bangun Merek yang",
+      "highlight": "Tampil Bedakan",
+      "subtitle": "Presensi web profesional yang dirancang untuk pertumbuhan, SEO, dan audiens global."
+    },
+    "restaurant": {
+      "title": "Rasakan Perbedaannya",
+      "highlight": "Setiap Kunjungan",
+      "subtitle": "Pengalaman restoran yang hangat dan modern — reservasi, menu, dan cerita Anda, semuanya di satu tempat."
+    },
+    "store": {
+      "title": "Belanja Koleksi",
+      "highlight": "Terbaru",
+      "subtitle": "Temukan pilihan produk pilihan kami dengan pengiriman cepat dan layanan excepcional."
+    },
+    "cta_primary": "Mulai Sekarang",
+    "cta_secondary": "Pelajari Lebih"
+  },
+  "company": {
+    "services": {
+      "badge": "Apa yang Kami Lakukan",
+      "title": "Layanan Kami",
+      "subtitle": "Semuanya yang dibutuhkan bisnis Anda untuk berkembang online.",
+      "item_1_title": "Desain Web",
+      "item_1_desc": "Website modern dan responsif yang dibuat untuk merek Anda.",
+      "item_2_title": "Optimasi SEO",
+      "item_2_desc": "Rank lebih tinggi, tarik lebih banyak pengunjung, tumbuh lebih cepat.",
+      "item_3_title": "Pemasaran Digital",
+      "item_3_desc": "Jangkau audiens yang tepat pada waktu yang tepat."
+    },
+    "about": {
+      "badge": "Cerita Kami",
+      "title": "Siapa Kami",
+      "body": "Kami adalah tim yang berdedikasi untuk memberikan pengalaman digital yang luar biasa. Dengan bertahun-tahun keahlian, kami membantu bisnis dari semua ukuran membangun kehadiran online yang kuat."
+    },
+    "gallery": {
+      "badge": "Karya Kami",
+      "title": "Galeri"
+    },
+    "features": {
+      "badge": "Mengapa Memilih Kami",
+      "title": "Dibuat Berbeda",
+      "item_1_title": "Cepat & Andal",
+      "item_1_desc": "Dioptimasi untuk performa dan uptime 99.9%.",
+      "item_2_title": "Mobile First",
+      "item_2_desc": "Tampil bagus di setiap layar, setiap perangkat.",
+      "item_3_title": "Siap SEO",
+      "item_3_desc": "Dibuat untuk mesin pencari dari dasar."
+    }
+  },
+  "catalog": {
+    "sort_relevance": "Relevansi",
+    "sort_price_asc": "Harga: Rendah ke Tinggi",
+    "sort_price_desc": "Harga: Tinggi ke Rendah"
+  },
+  "restaurant": {
+    "feature": {
+      "badge": "Suasana Kami",
+      "title": "Pengalaman Bersantap",
+      "desc": "Ruang yang hangat dan welcoming untuk setiap acara — dari makan keluarga hingga perayaan khusus."
+    },
+    "full_menu": {
+      "title": "Menu Lengkap",
+      "view_all": "Lihat Menu Lengkap →",
+      "search_placeholder": "Cari hidangan…",
+      "cat_all": "Semua",
+      "cat_main": "Utama",
+      "cat_dessert": "Pencuci Mulut",
+      "cat_sides": "Pelengkap",
+      "sub_all": "Semua",
+      "sub_rice": "Nasi",
+      "sub_noodle": "Mie",
+      "sub_mifen": "Mie Nasi"
+    },
+    "menu": {
+      "badge": "Menu Kami",
+      "title": "Pilihan Hari Ini",
+      "subtitle": "Bahan segar, dibuat dengan penuh perhatian.",
+      "cat_1": "Pembuka",
+      "cat_2": "Hidangan Utama",
+      "cat_3": "Pencuci Mulut",
+      "item_1_name": "Salad Kebun",
+      "item_1_desc": "Sayuran musiman segar, tomat cherry, saus rumah",
+      "item_1_price": "Rp 35.000",
+      "item_2_name": "Cumi Crispy",
+      "item_2_desc": "Bulat tepung ringan, disajikan dengan aioli lemon",
+      "item_2_price": "Rp 48.000",
+      "item_3_name": "Salmon Panggang",
+      "item_3_desc": "Salmon Atlantik, sayuran panggang, butter herbs",
+      "item_3_price": "Rp 95.000",
+      "item_4_name": "Tenderloin Sapi",
+      "item_4_desc": "200g, medium rare, reduksi anggur merah",
+      "item_4_price": "Rp 135.000",
+      "item_5_name": "Chocolate Lava",
+      "item_5_desc": "Kue cokelat hangat, es krim vanila",
+      "item_5_price": "Rp 32.000",
+      "item_6_name": "Crème Brûlée",
+      "item_6_desc": "Krim custard klasik Perancis, gula karamel atas",
+      "item_6_price": "Rp 30.000"
+    },
+    "about": {
+      "badge": "Cerita Kami",
+      "title": "Tradisi Rasa",
+      "body": "Didirikan tahun 2018, kami melayani komunitas dengan passion dan dedikasi. Setiap hidangan menceritakan kisah bahan yang dipilih dengan hati dan resep yang dihormati."
+    },
+    "hours": {
+      "badge": "Temukan Kami",
+      "title": "Jam & Lokasi",
+      "mon_fri": "Senin – Jumat",
+      "mon_fri_hours": "11:30 – 22:00",
+      "sat_sun": "Sabtu – Minggu",
+      "sat_sun_hours": "10:00 – 23:00",
+      "address": "123 Jalan Demo, Jakarta Selatan",
+      "phone": "+62 21 1234 5678"
+    }
+  },
+  "store": {
+    "full_products": {
+      "title": "Semua Produk",
+      "view_all": "Lihat Semua Produk →",
+      "search_placeholder": "Cari produk…",
+      "cat_all": "Semua",
+      "cat_apparel": "Pakaian",
+      "cat_accessories": "Aksesoris",
+      "cat_home": "Rumah & Hidup",
+      "cat_gifts": "Hadiah"
+    },
+    "featured": {
+      "badge": "Produk Baru",
+      "title": "Produk Pilihan",
+      "subtitle": "Pilihan yang dipilih tangan, hanya untuk Anda.",
+      "item_1_name": "Kaos Klasik",
+      "item_1_desc": "100% katun organik, tersedia dalam 8 warna",
+      "item_1_price": "Rp 118.000",
+      "item_2_name": "Tote Canvas",
+      "item_2_desc": "Tahan lama, luas, dan bergaya",
+      "item_2_price": "Rp 76.000",
+      "item_3_name": "Mangkuk Keramik",
+      "item_3_desc": "Dibuat tangan, aman pencu piring, 350ml",
+      "item_3_price": "Rp 64.000",
+      "add_to_cart": "Tambah ke Keranjang"
+    },
+    "categories": {
+      "badge": "Belanja Berdasarkan",
+      "title": "Kategori",
+      "cat_1": "Pakaian",
+      "cat_2": "Aksesoris",
+      "cat_3": "Rumah & Hidup",
+      "cat_4": "Hadiah"
+    },
+    "about": {
+      "badge": "Merek Kami",
+      "title": "Dibuat dengan Tujuan",
+      "body": "Setiap produk di toko kami dirancang dengan sengaja dan bersumber secara berkelanjutan. Kami percaya kualitas di atas kuantitas — setiap item dibuat untuk bertahan dan membawa kebahagiaan sejati."
+    }
+  },
+  "contact": {
+    "badge": "Hubungi Kami",
+    "title": "Siap Memulai?",
+    "subtitle": "Hubungi kami dan kami akan merespons dalam 24 jam.",
+    "name_label": "Nama Lengkap",
+    "email_label": "Alamat Email",
+    "message_label": "Pesan",
+    "submit": "Kirim Pesan",
+    "success": "Pesan terkirim! Kami akan segera menghubungi Anda.",
+    "error_required": "Kolom ini wajib diisi.",
+    "error_email": "Masukkan alamat email yang valid."
+  },
+  "footer": {
+    "tagline": "Ini adalah situs demo oleh Web人.",
+    "copyright": "© 2025 Web人. Hak cipta dilindungi.",
+    "counter_today": "Hari Ini",
+    "counter_yesterday": "Kemarin",
+    "counter_lastmonth": "Bulan Lalu",
+    "counter_total": "Total"
+  },
+  "demo_nav": {
+    "brand": "MerekAnda"
+  },
+  "demo_bar": {
+    "company": "Perusahaan",
+    "restaurant": "Restoran",
+    "store": "Toko",
+    "hint": "Ketuk di bawah untuk kustomisasi ↓"
+  },
+  "marquee": {
+    "item1": "Website Kustom",
+    "item2": "Pengiriman Cepat",
+    "item3": "Ramah Seluler",
+    "item4": "Siap SEO",
+    "item5": "Dukung Dual Bahasa",
+    "item6": "Integrasi Google Forms",
+    "item7": "Penghitung Kunjungan Live",
+    "item8": "Email Bisnis"
+  },
+  "configurator": {
+    "preset_label": "Tema Cepat",
+    "button": "Kustomisasi",
+    "title": "Kustomisasi Situs Anda",
+    "mode_label": "Jenis Bisnis",
+    "mode_company": "Perusahaan",
+    "mode_restaurant": "Restoran",
+    "mode_store": "Toko",
+    "theme_label": "Warna Tema",
+    "color_primary": "Primer",
+    "color_accent": "Aksen",
+    "color_bg": "Latar",
+    "color_text": "Teks",
+    "auto_theme": "Tema Otomatis",
+    "fonts_label": "Font",
+    "font_heading": "Font Heading",
+    "font_body": "Font Body",
+    "bg_label": "Latar",
+    "lang_label": "Bahasa",
+    "contact_label": "Detail Anda",
+    "name_placeholder": "Nama Lengkap",
+    "email_placeholder": "Alamat Email",
+    "phone_placeholder": "Nomor Telepon",
+    "codename_placeholder": "Kode Agent (diberikan oleh agen Anda)",
+    "send": "Kirim ke Web人",
+    "sending": "Mengirim...",
+    "success": "Terkirim! Agen Anda akan segera menghubungi.",
+    "error": "Terjadi kesalahan. Silakan coba lagi.",
+    "error_codename": "Kode agen tidak ditemukan. Silakan hubungi agen Anda.",
+    "back": "Kembali",
+    "bg_particles": "Partikel",
+    "bg_waves": "Gelombang",
+    "bg_grid": "Grid",
+    "bg_blobs": "Blob",
+    "bg_none": "Tidak Ada",
+    "bg_stars": "Bintang",
+    "bg_geometric": "Geometrik",
+    "bg_ripple": "Riak",
+    "bg_fireflies": "Kunang-kunang",
+    "bg_aurora": "Aurora",
+    "preset_ivory": "Gading",
+    "preset_midnight": "Malam",
+    "preset_ocean": "Laut",
+    "preset_forest": "Hutan",
+    "preset_sunset": "Matahari Terbenam",
+    "preset_rose": "Mawar",
+    "preset_arctic": "Arktik",
+    "preset_obsidian": "Obsidian",
+    "preset_amethyst": "Ametis",
+    "preset_marigold": "Marigold",
+    "error_name": "Nama minimal 2 karakter.",
+    "error_email_invalid": "Masukkan alamat email yang valid.",
+    "error_phone": "Nomor telepon harus mengandung minimal 8 digit.",
+    "error_codename_required": "Kode agen wajib diisi."
+  }
+}
