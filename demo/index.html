@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webren Demo — Website Configurator | Web人</title>
+  <meta name="description" content="Preview and customize your Option A website by Web人. Choose your business type, colors, and fonts, then send your preferences directly.">
+  <meta name="keywords" content="web design demo, website configurator, webren, Web人, business website preview">
+  <meta name="author" content="Web人">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0d9488">
+  <link rel="canonical" href="https://rayantion26.github.io/webren/demo/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rayantion26.github.io/webren/demo/">
+  <meta property="og:title" content="Webren Demo — Website Configurator">
+  <meta property="og:description" content="Preview and customize your Option A website. Configure colors, fonts, and business type, then send to Web人.">
+  <meta property="og:image" content="https://rayantion26.github.io/webren/demo/assets/images/og-image.jpg">
+  <meta property="og:site_name" content="Web人">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Webren Demo — Website Configurator">
+  <meta name="twitter:description" content="Preview and configure your Option A website by Web人.">
+  <meta name="twitter:image" content="https://rayantion26.github.io/webren/demo/assets/images/og-image.jpg">
+
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="en" href="https://rayantion26.github.io/webren/demo/">
+  <link rel="alternate" hreflang="zh-TW" href="https://rayantion26.github.io/webren/demo/?lang=zh-TW">
+  <link rel="alternate" hreflang="x-default" href="https://rayantion26.github.io/webren/demo/">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Webren Website Configurator",
+    "url": "https://rayantion26.github.io/webren/demo/",
+    "description": "Interactive website configurator and demo for Web人 Option A clients",
+    "applicationCategory": "WebApplication",
+    "operatingSystem": "Any",
+    "inLanguage": ["en", "zh-TW"],
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+    "author": { "@type": "Organization", "name": "Web人", "url": "https://rayantion26.github.io/webren/" }
+  }
+  </script>
+
+  <!-- Fonts (defaults — JS will inject additional Google Fonts as needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/shared-nav.css?v=34">
+  <link rel="stylesheet" href="css/style.css?v=34">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <!-- Page transition overlay -->
+  <div id="page-transition"></div>
+
+  <!-- Demo indicator bar -->
+  <div id="demo-bar">
+    <div class="container demo-bar-inner">
+      <span class="demo-badge">DEMO PREVIEW</span>
+      <div class="mode-switcher-wrap" id="mode-switcher-wrap">
+        <button type="button" class="mode-switcher-current" id="mode-switcher-btn" aria-expanded="false" aria-haspopup="listbox">
+          <span class="mode-switcher-icon" id="mode-switcher-icon">🏢</span>
+          <span class="mode-switcher-label" id="mode-switcher-label" data-i18n="demo_bar.company">Company</span>
+          <svg class="mode-switcher-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </button>
+        <ul class="mode-switcher-dropdown" id="mode-switcher-dropdown" role="listbox">
+          <li class="mode-switcher-option active" data-mode="company" role="option">
+            <span class="mode-option-icon">🏢</span>
+            <span data-i18n="demo_bar.company">Company</span>
+          </li>
+          <li class="mode-switcher-option" data-mode="restaurant" role="option">
+            <span class="mode-option-icon">🍽️</span>
+            <span data-i18n="demo_bar.restaurant">Restaurant</span>
+          </li>
+          <li class="mode-switcher-option" data-mode="store" role="option">
+            <span class="mode-option-icon">🛍️</span>
+            <span data-i18n="demo_bar.store">Store</span>
+          </li>
+        </ul>
+      </div>
+<span class="demo-hint" data-i18n="demo_bar.hint">Tap &#10022; below to customize</span>
+    </div>
+  </div>
+
+
+  <!-- ââ Main content ââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+  <div id="demo-preview">
+
+  <!-- Inner demo site nav (themed with demo colors) -->
+  <header id="demo-site-nav">
+    <div class="container demo-nav-inner">
+      <a class="demo-nav-logo" href="#company-home" data-section="home">
+        <div class="demo-logo-dot"></div>
+        <span data-i18n="demo_nav.brand">YourBrand</span>
+      </a>
+      <ul class="demo-nav-links">
+        <li><a href="#company-home" data-section="home" data-i18n="nav.home">Home</a></li>
+        <li><a href="#services" id="demo-nav-services" data-i18n="nav.services">Services</a></li>
+        <li><a href="#company-about" data-section="about" data-i18n="nav.about">About</a></li>
+        <li><a href="#company-gallery" data-section="gallery" data-i18n="nav.gallery">Gallery</a></li>
+        <li><a href="#company-contact" data-section="contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="lang-toggle demo-nav-lang">
+        <button type="button" class="lang-btn active" data-lang="en" aria-label="Switch to English">EN</button>
+        <button type="button" class="lang-btn" data-lang="zh-TW" aria-label="Switch to Traditional Chinese">中文</button>
+      </div>
+      <a href="#company-contact" class="demo-nav-cta" data-section="contact" data-i18n="hero.cta_primary">Get Started</a>
+      <button type="button" id="demo-menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Inner demo mobile menu (slide-in from right) -->
+  <nav id="demo-mobile-menu" aria-label="Demo site navigation">
+    <a href="#company-home" data-section="home" data-i18n="nav.home">Home</a>
+    <a href="#services" id="demo-mobile-services" data-i18n="nav.services">Services</a>
+    <a href="#company-about" data-section="about" data-i18n="nav.about">About</a>
+    <a href="#company-gallery" data-section="gallery" data-i18n="nav.gallery">Gallery</a>
+    <a href="#company-contact" data-section="contact" data-i18n="nav.contact">Contact</a>
+    <div class="lang-toggle demo-mobile-lang">
+      <button type="button" class="lang-btn active" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="zh-TW">中文</button>
+    </div>
+  </nav>
+  <div id="demo-mobile-overlay"></div>
+
+  <main id="main-content">
+
+    <!-- ââ COMPANY MODE ââââââââââââââââââââââââââââââââââââââââââââââ -->
+    <div id="mode-company" class="mode-sections">
+
+      <section class="hero" id="company-home">
+        <canvas id="threejs-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+        <div class="container hero-inner">
+          <div class="hero-content reveal">
+            <span class="badge" data-i18n="hero.badge"></span>
+            <h1><span data-i18n="hero.company.title"></span> <span class="highlight" data-i18n="hero.company.highlight"></span></h1>
+            <p data-i18n="hero.company.subtitle"></p>
+            <div class="hero-actions">
+              <button type="button" class="btn-primary" data-i18n="hero.cta_primary">Get Started</button>
+              <button type="button" class="btn-secondary" data-i18n="hero.cta_secondary">Learn More</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ââ Marquee strip ââââââââââââââââââââââââââââââââââââââââ -->
+      <div class="marquee-section" aria-hidden="true">
+        <div class="marquee-track">
+          <span data-i18n="marquee.item1">Custom Websites</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item2">Fast Delivery</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item3">Mobile Friendly</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item4">SEO Ready</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item5">Bilingual Support</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item6">Google Forms Integration</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item7">Live View Counter</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item8">Business Email</span><span class="dot">&middot;</span>
+          <!-- duplicate for seamless loop -->
+          <span data-i18n="marquee.item1">Custom Websites</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item2">Fast Delivery</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item3">Mobile Friendly</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item4">SEO Ready</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item5">Bilingual Support</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item6">Google Forms Integration</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item7">Live View Counter</span><span class="dot">&middot;</span>
+          <span data-i18n="marquee.item8">Business Email</span><span class="dot">&middot;</span>
+        </div>
+      </div>
+      <section id="services">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge" data-i18n="company.services.badge"></span>
+            <h2 data-i18n="company.services.title">Our Services</h2>
+            <p data-i18n="company.services.subtitle"></p>
+          </div>
+          <div class="card-grid">
+            <div class="card reveal">
+              <h3 data-i18n="company.services.item_1_title">Web Design</h3>
+              <p data-i18n="company.services.item_1_desc"></p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="company.services.item_2_title">SEO Optimization</h3>
+              <p data-i18n="company.services.item_2_desc"></p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="company.services.item_3_title">Digital Marketing</h3>
+              <p data-i18n="company.services.item_3_desc"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="company-about">
+        <div class="container about-split">
+          <img class="about-img reveal" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop&q=80" alt="Our team collaborating" loading="lazy">
+          <div class="about-inner reveal">
+            <span class="badge" data-i18n="company.about.badge"></span>
+            <h2 data-i18n="company.about.title">Who We Are</h2>
+            <p data-i18n="company.about.body"></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="company-gallery">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge" data-i18n="company.gallery.badge">Our Gallery</span>
+            <h2 data-i18n="company.gallery.title">Gallery</h2>
+          </div>
+          <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop&q=80" alt="Modern office space" class="gallery-item reveal" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=600&h=400&fit=crop&q=80" alt="Team at work" class="gallery-item reveal" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?w=600&h=400&fit=crop&q=80" alt="Collaborative review" class="gallery-item reveal" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop&q=80" alt="Team collaboration" class="gallery-item reveal" loading="lazy">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge" data-i18n="company.features.badge"></span>
+            <h2 data-i18n="company.features.title">Built Different</h2>
+          </div>
+          <div class="card-grid">
+            <div class="card reveal">
+              <h3 data-i18n="company.features.item_1_title">Fast &amp; Reliable</h3>
+              <p data-i18n="company.features.item_1_desc"></p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="company.features.item_2_title">Mobile First</h3>
+              <p data-i18n="company.features.item_2_desc"></p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="company.features.item_3_title">SEO Ready</h3>
+              <p data-i18n="company.features.item_3_desc"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="company-contact">
+        <div class="container contact-inner reveal">
+          <span class="badge" data-i18n="contact.badge"></span>
+          <h2 data-i18n="contact.title">Ready to Start?</h2>
+          <p data-i18n="contact.subtitle"></p>
+          <div class="contact-links">
+            <a class="contact-link" href="https://wa.me/60123456789" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </a>
+            <a class="contact-link" href="mailto:hello@webren.demo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+              hello@webren.demo
+            </a>
+            <span class="contact-link contact-location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              123 Demo Street, Taipei City
+            </span>
+          </div>
+          <form class="contact-form demo-contact-form" novalidate>
+            <div class="cf-group">
+              <label data-i18n="contact.name_label"></label>
+              <input type="text" name="name" required data-i18n-placeholder="contact.name_label">
+            </div>
+            <div class="cf-group">
+              <label data-i18n="contact.email_label"></label>
+              <input type="email" name="email" required data-i18n-placeholder="contact.email_label">
+            </div>
+            <div class="cf-group">
+              <label data-i18n="contact.message_label"></label>
+              <textarea name="message" rows="4" required data-i18n-placeholder="contact.message_label"></textarea>
+            </div>
+            <button type="submit" class="btn-primary cf-submit" data-i18n="contact.submit"></button>
+          </form>
+        </div>
+      </section>
+
+    </div><!-- end #mode-company -->
+
+    <!-- ââ RESTAURANT MODE ââââââââââââââââââââââââââââââââââââââââââ -->
+    <div id="mode-restaurant" class="mode-sections">
+
+      <section class="hero" id="restaurant-home">
+        <canvas class="hero-canvas" aria-hidden="true"></canvas>
+        <div class="container hero-inner">
+          <div class="hero-content reveal">
+            <span class="badge" data-i18n="hero.badge"></span>
+            <h1><span data-i18n="hero.restaurant.title"></span> <span class="highlight" data-i18n="hero.restaurant.highlight"></span></h1>
+            <p data-i18n="hero.restaurant.subtitle"></p>
+            <div class="hero-actions">
+              <button type="button" class="btn-primary" data-i18n="hero.cta_primary">Get Started</button>
+              <button type="button" class="btn-secondary" data-i18n="hero.cta_secondary">Learn More</button>
+            </div>
+          </div>
+        </div>
+<section class="restaurant-feature-section">        <div class="container restaurant-feature">          <img class="restaurant-img reveal" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&h=400&fit=crop&q=80" alt="Restaurant ambiance" loading="lazy">          <div class="restaurant-feature-text reveal">            <span class="badge" data-i18n="restaurant.feature.badge">Our Atmosphere</span>            <h2 data-i18n="restaurant.feature.title">Dining Experience</h2>            <p data-i18n="restaurant.feature.desc">A warm and welcoming space crafted for every occasion.</p>          </div>        </div>      </section>
+      </section>
+
+      <section id="menu">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge" data-i18n="restaurant.menu.badge"></span>
+            <h2 data-i18n="restaurant.menu.title">Today's Selections</h2>
+            <p data-i18n="restaurant.menu.subtitle"></p>
+          </div>
+          <div class="menu-tabs">
+            <button type="button" class="menu-tab active" data-category="all" data-i18n="restaurant.full_menu.cat_all"></button>
+            <button type="button" class="menu-tab" data-category="main" data-i18n="restaurant.menu.cat_2"></button>
+            <button type="button" class="menu-tab" data-category="dessert" data-i18n="restaurant.menu.cat_3"></button>
+            <button type="button" class="menu-tab" data-category="sides" data-i18n="restaurant.full_menu.cat_sides"></button>
+          </div>
+          <div class="menu-grid" id="featured-menu-grid"></div>
+          <div class="view-all-wrap reveal">
+            <button type="button" class="btn-primary" data-show-subpage="restaurant-menu-page" data-i18n="restaurant.full_menu.view_all">View Full Menu →</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="restaurant-about">
+        <div class="container about-inner reveal">
+          <span class="badge" data-i18n="restaurant.about.badge"></span>
+          <h2 data-i18n="restaurant.about.title">A Tradition of Flavour</h2>
+          <p data-i18n="restaurant.about.body"></p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge" data-i18n="restaurant.hours.badge"></span>
+            <h2 data-i18n="restaurant.hours.title">Hours &amp; Location</h2>
+          </div>
+          <div class="hours-grid">
+            <div class="card reveal">
+              <h3 data-i18n="restaurant.hours.mon_fri">Monday – Friday</h3>
+              <p data-i18n="restaurant.hours.mon_fri_hours"></p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="restaurant.hours.sat_sun">Saturday – Sunday</h3>
+              <p data-i18n="restaurant.hours.sat_sun_hours"></p>
+            </div>
+            <div class="card reveal">
+              <p data-i18n="restaurant.hours.address"></p>
+              <p data-i18n="restaurant.hours.phone"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="restaurant-contact">
+        <div class="container contact-inner reveal">
+          <span class="badge" data-i18n="contact.badge"></span>
+          <h2 data-i18n="contact.title">Ready to Start?</h2>
+          <p data-i18n="contact.subtitle"></p>
+          <div class="contact-links">
+            <a class="contact-link" href="https://wa.me/60123456789" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </a>
+            <a class="contact-link" href="mailto:hello@webren.demo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+              hello@webren.demo
+            </a>
+            <span class="contact-link contact-location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              123 Demo Street, Taipei City
+            </span>
+          </div>
+          <form class="contact-form demo-contact-form" novalidate>
+            <div class="cf-group">
+              <label data-i18n="contact.name_label"></label>
+              <input type="text" name="name" required data-i18n-placeholder="contact.name_label">
+            </div>
+            <div class="cf-group">
+              <label data-i18n="contact.email_label"></label>
+              <input type="email" name="email" required data-i18n-placeholder="contact.email_label">
+            </div>
+            <div class="cf-group">
+              <label data-i18n="contact.message_label"></label>
+              <textarea name="message" rows="4" required data-i18n-placeholder="contact.message_label"></textarea>
+            </div>
+            <button type="submit" class="btn-primary cf-submit" data-i18n="contact.submit"></button>
+          </form>
+        </div>
+      </section>
+
+
+      <!-- Full Menu Sub-page -->
+      <div id="restaurant-menu-page" class="sub-page">
+        <div class="sub-page-header">
+          <div class="container">
+            <button type="button" class="sub-page-back" data-close-subpage data-i18n="nav.back_to_main">Back</button>
+            <h1 data-i18n="restaurant.full_menu.title">Full Menu</h1>
+          </div>
+        </div>
+        <div class="container">
+          <div class="catalog-controls">
+            <input type="search" id="menu-search" class="catalog-search" placeholder="Search dishes...">
+            <div class="filter-tabs" id="menu-category-tabs">
+              <button type="button" class="filter-tab active" data-category="all" data-i18n="restaurant.full_menu.cat_all">All</button>
+              <button type="button" class="filter-tab" data-category="main" data-i18n="restaurant.full_menu.cat_main">Main</button>
+              <button type="button" class="filter-tab" data-category="dessert" data-i18n="restaurant.full_menu.cat_dessert">Dessert</button>
+              <button type="button" class="filter-tab" data-category="sides" data-i18n="restaurant.full_menu.cat_sides">Side Dishes</button>
+            </div>
+            <div id="menu-subcategory-tabs" class="sub-category-tabs">
+              <button type="button" class="filter-tab active" data-subcategory="all" data-i18n="restaurant.full_menu.sub_all">All</button>
+              <button type="button" class="filter-tab" data-subcategory="rice" data-i18n="restaurant.full_menu.sub_rice">Rice</button>
+              <button type="button" class="filter-tab" data-subcategory="noodle" data-i18n="restaurant.full_menu.sub_noodle">Noodle</button>
+              <button type="button" class="filter-tab" data-subcategory="mifen" data-i18n="restaurant.full_menu.sub_mifen">Rice Noodle</button>
+            </div>
+            <div class="catalog-sort-row">
+              <select class="catalog-sort-select" id="menu-sort-ui" aria-label="Sort">
+                <option value="relevance">Relevance</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+          <div id="menu-results-count" class="results-count"></div>
+          <div id="menu-grid"></div>
+        </div>
+      </div>
+    </div><!-- end #mode-restaurant -->
+
+    <!-- ââ STORE MODE ââââââââââââââââââââââââââââââââââââââââââââââââ -->
+    <div id="mode-store" class="mode-sections">
+
+      <section class="hero" id="store-home">
+        <canvas class="hero-canvas" aria-hidden="true"></canvas>
+        <div class="container hero-inner">
+          <div class="hero-content reveal">
+            <span class="badge" data-i18n="hero.badge"></span>
+            <h1><span data-i18n="hero.store.title"></span> <span class="highlight" data-i18n="hero.store.highlight"></span></h1>
+            <p data-i18n="hero.store.subtitle"></p>
+            <div class="hero-actions">
+              <button type="button" class="btn-primary" data-i18n="hero.cta_primary">Get Started</button>
+              <button type="button" class="btn-secondary" data-i18n="hero.cta_secondary">Learn More</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="products">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge" data-i18n="store.featured.badge"></span>
+            <h2 data-i18n="store.featured.title">Featured Products</h2>
+            <p data-i18n="store.featured.subtitle"></p>
+          </div>
+          <div class="card-grid">
+            <div class="product-card card reveal">
+              <img class="product-img" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop&q=80" alt="Premium Watch" loading="lazy">
+              <h3 data-i18n="store.featured.item_1_name">Classic Tee</h3>
+              <p data-i18n="store.featured.item_1_desc"></p>
+              <div class="product-footer">
+                <span class="product-price" data-i18n="store.featured.item_1_price"></span>
+              </div>
+            </div>
+            <div class="product-card card reveal">
+              <img class="product-img" src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&h=300&fit=crop&q=80" alt="Running Shoes" loading="lazy">
+              <h3 data-i18n="store.featured.item_2_name">Canvas Tote</h3>
+              <p data-i18n="store.featured.item_2_desc"></p>
+              <div class="product-footer">
+                <span class="product-price" data-i18n="store.featured.item_2_price"></span>
+              </div>
+            </div>
+            <div class="product-card card reveal">
+              <img class="product-img" src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&h=300&fit=crop&q=80" alt="Skincare Product" loading="lazy">
+              <h3 data-i18n="store.featured.item_3_name">Ceramic Mug</h3>
+              <p data-i18n="store.featured.item_3_desc"></p>
+              <div class="product-footer">
+                <span class="product-price" data-i18n="store.featured.item_3_price"></span>
+              </div>
+            </div>
+          </div>
+          <div class="view-all-wrap reveal">
+            <button type="button" class="btn-primary" data-show-subpage="store-products-page" data-i18n="store.full_products.view_all">View All Products →</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-alt">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge" data-i18n="store.categories.badge"></span>
+            <h2 data-i18n="store.categories.title">Categories</h2>
+          </div>
+          <div class="cat-grid">
+            <div class="cat-card reveal" data-i18n="store.categories.cat_1" data-show-subpage="store-products-page" data-filter-category="apparel" style="cursor:pointer"></div>
+            <div class="cat-card reveal" data-i18n="store.categories.cat_2" data-show-subpage="store-products-page" data-filter-category="accessories" style="cursor:pointer"></div>
+            <div class="cat-card reveal" data-i18n="store.categories.cat_3" data-show-subpage="store-products-page" data-filter-category="home" style="cursor:pointer"></div>
+            <div class="cat-card reveal" data-i18n="store.categories.cat_4" data-show-subpage="store-products-page" data-filter-category="gifts" style="cursor:pointer"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="store-about">
+        <div class="container about-inner reveal">
+          <span class="badge" data-i18n="store.about.badge"></span>
+          <h2 data-i18n="store.about.title">Made with Purpose</h2>
+          <p data-i18n="store.about.body"></p>
+        </div>
+      </section>
+
+      <section id="store-contact">
+        <div class="container contact-inner reveal">
+          <span class="badge" data-i18n="contact.badge"></span>
+          <h2 data-i18n="contact.title">Ready to Start?</h2>
+          <p data-i18n="contact.subtitle"></p>
+          <div class="contact-links">
+            <a class="contact-link" href="https://wa.me/60123456789" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </a>
+            <a class="contact-link" href="mailto:hello@webren.demo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+              hello@webren.demo
+            </a>
+            <span class="contact-link contact-location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              123 Demo Street, Taipei City
+            </span>
+          </div>
+          <form class="contact-form demo-contact-form" novalidate>
+            <div class="cf-group">
+              <label data-i18n="contact.name_label"></label>
+              <input type="text" name="name" required data-i18n-placeholder="contact.name_label">
+            </div>
+            <div class="cf-group">
+              <label data-i18n="contact.email_label"></label>
+              <input type="email" name="email" required data-i18n-placeholder="contact.email_label">
+            </div>
+            <div class="cf-group">
+              <label data-i18n="contact.message_label"></label>
+              <textarea name="message" rows="4" required data-i18n-placeholder="contact.message_label"></textarea>
+            </div>
+            <button type="submit" class="btn-primary cf-submit" data-i18n="contact.submit"></button>
+          </form>
+        </div>
+      </section>
+
+
+      <!-- Full Products Sub-page -->
+      <div id="store-products-page" class="sub-page">
+        <div class="sub-page-header">
+          <div class="container">
+            <button type="button" class="sub-page-back" data-close-subpage data-i18n="nav.back_to_main">Back</button>
+            <h1 data-i18n="store.full_products.title">All Products</h1>
+          </div>
+        </div>
+        <div class="container">
+          <div class="catalog-controls">
+            <input type="search" id="products-search" class="catalog-search" placeholder="Search products...">
+            <div class="filter-tabs" id="products-category-tabs">
+              <button type="button" class="filter-tab active" data-category="all" data-i18n="store.full_products.cat_all">All</button>
+              <button type="button" class="filter-tab" data-category="apparel" data-i18n="store.full_products.cat_apparel">Apparel</button>
+              <button type="button" class="filter-tab" data-category="accessories" data-i18n="store.full_products.cat_accessories">Accessories</button>
+              <button type="button" class="filter-tab" data-category="home" data-i18n="store.full_products.cat_home">Home &amp; Living</button>
+              <button type="button" class="filter-tab" data-category="gifts" data-i18n="store.full_products.cat_gifts">Gifts</button>
+            </div>
+            <div class="catalog-sort-row">
+              <select class="catalog-sort-select" id="products-sort-ui" aria-label="Sort">
+                <option value="relevance">Relevance</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+          <div id="products-results-count" class="results-count"></div>
+          <div id="products-grid"></div>
+        </div>
+      </div>
+    </div><!-- end #mode-store -->
+
+  </main>
+
+  <!-- ââ Footer ââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+  <footer id="site-footer">
+    <div class="container footer-inner">
+      <p data-i18n="footer.tagline"></p>
+      <div id="view-counter" class="view-counter">
+        <span class="counter-item">
+          <span data-i18n="footer.counter_today"></span>: <strong data-count="47">0</strong>
+        </span>
+        <span class="counter-item">
+          <span data-i18n="footer.counter_yesterday"></span>: <strong data-count="83">0</strong>
+        </span>
+        <span class="counter-item">
+          <span data-i18n="footer.counter_lastmonth"></span>: <strong data-count="1240">0</strong>
+        </span>
+        <span class="counter-item">
+          <span data-i18n="footer.counter_total"></span>: <strong data-count="8600">0</strong>
+        </span>
+      </div>
+      <p class="footer-copy" data-i18n="footer.copyright"></p>
+    </div>
+  <!-- ── Floating chat bubbles ───────────────────────────────────────── -->
+  <div class="chat-bubbles">
+    <a class="chat-bubble chat-bubble-wa" href="https://wa.me/60123456789" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <a class="chat-bubble chat-bubble-line" href="https://line.me/ti/p/~rayantion" target="_blank" rel="noopener noreferrer" aria-label="LINE">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+    </a>
+  </div>
+  </footer>
+  </div><!-- end #demo-preview -->
+
+  <!-- ââ Config Drawer ââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+  <button type="button" id="config-toggle" aria-label="Customize">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="8" cy="6" r="2.5" fill="currentColor" stroke="none"/><circle cx="16" cy="12" r="2.5" fill="currentColor" stroke="none"/><circle cx="10" cy="18" r="2.5" fill="currentColor" stroke="none"/></svg>
+    <span data-i18n="configurator.button"></span>
+  </button>
+
+  <div id="config-backdrop"></div>
+
+  <aside id="config-drawer" role="dialog" aria-label="Site Configurator">
+    <div class="drawer-header">
+      <button type="button" id="config-back" class="btn-drawer-back-top" aria-label="Back">&larr; <span data-i18n="configurator.back">Back</span></button>
+      <h2 data-i18n="configurator.title">Customize Your Site</h2>
+      <button type="button" id="config-close" aria-label="Close">â</button>
+    </div>
+    <div class="drawer-body">
+
+      <div class="drawer-section">
+        <label data-i18n="configurator.mode_label"></label>
+        <div class="mode-btns">
+          <button type="button" class="mode-btn active" data-mode="company" data-i18n="configurator.mode_company">Company</button>
+          <button type="button" class="mode-btn" data-mode="restaurant" data-i18n="configurator.mode_restaurant">Restaurant</button>
+          <button type="button" class="mode-btn" data-mode="store" data-i18n="configurator.mode_store">Store</button>
+        </div>
+      </div>
+
+      <div class="drawer-section">
+        <label data-i18n="configurator.preset_label"></label>
+        <div class="preset-grid" id="preset-grid"></div>
+      </div>
+
+      <div class="drawer-section">
+        <label data-i18n="configurator.theme_label"></label>
+        <div class="color-row">
+          <div class="color-item">
+            <span data-i18n="configurator.color_primary"></span>
+            <div class="color-input-wrap">
+              <input type="color" id="cp-primary" value="#0D9488">
+              <input type="text" class="hex-input" id="hex-primary" value="#0D9488" maxlength="7">
+            </div>
+          </div>
+          <div class="color-item">
+            <span data-i18n="configurator.color_accent"></span>
+            <div class="color-input-wrap">
+              <input type="color" id="cp-accent" value="#7C3AED">
+              <input type="text" class="hex-input" id="hex-accent" value="#7C3AED" maxlength="7">
+            </div>
+          </div>
+          <div class="color-item">
+            <span data-i18n="configurator.color_bg"></span>
+            <div class="color-input-wrap">
+              <input type="color" id="cp-bg" value="#FAFAFA">
+              <input type="text" class="hex-input" id="hex-bg" value="#FAFAFA" maxlength="7">
+            </div>
+          </div>
+          <div class="color-item">
+            <span data-i18n="configurator.color_text"></span>
+            <div class="color-input-wrap">
+              <input type="color" id="cp-text" value="#111827">
+              <input type="text" class="hex-input" id="hex-text" value="#111827" maxlength="7">
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn-auto-theme" id="btn-auto-theme" data-i18n="configurator.auto_theme">Auto Theme</button>
+      </div>
+
+      <div class="drawer-section">
+        <label data-i18n="configurator.fonts_label"></label>
+        <div class="font-row">
+          <div class="font-item">
+            <span data-i18n="configurator.font_heading"></span>
+            <div class="custom-font-select" id="sel-heading-font" data-value="">
+              <button class="custom-font-btn" type="button" aria-expanded="false" aria-haspopup="listbox">
+                <span class="custom-font-label">Playfair Display</span>
+                <svg class="custom-font-arrow" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+              </button>
+              <ul class="custom-font-list" role="listbox"></ul>
+            </div>
+          </div>
+          <div class="font-item">
+            <span data-i18n="configurator.font_body"></span>
+            <div class="custom-font-select" id="sel-body-font" data-value="">
+              <button class="custom-font-btn" type="button" aria-expanded="false" aria-haspopup="listbox">
+                <span class="custom-font-label">Inter</span>
+                <svg class="custom-font-arrow" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+              </button>
+              <ul class="custom-font-list" role="listbox"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-section">
+        <label data-i18n="configurator.bg_label">Background</label>
+        <div class="bg-style-grid" id="bg-style-grid">
+          <button type="button" class="bg-style-tile active" data-bg="particles">
+            <span class="bg-tile-preview bg-prev-particles"></span>
+            <span data-i18n="configurator.bg_particles">Particles</span>
+          </button>
+          <button type="button" class="bg-style-tile" data-bg="waves">
+            <span class="bg-tile-preview bg-prev-waves"></span>
+            <span data-i18n="configurator.bg_waves">Waves</span>
+          </button>
+          <button type="button" class="bg-style-tile" data-bg="grid">
+            <span class="bg-tile-preview bg-prev-grid"></span>
+            <span data-i18n="configurator.bg_grid">Grid</span>
+          </button>
+          <button type="button" class="bg-style-tile" data-bg="blobs">
+            <span class="bg-tile-preview bg-prev-blobs"></span>
+            <span data-i18n="configurator.bg_blobs">Blobs</span>
+          </button>
+          <button type="button" class="bg-style-tile" data-bg="none">
+            <span class="bg-tile-preview bg-prev-none"></span>
+            <span data-i18n="configurator.bg_none">None</span>
+          </button>
+          <button type="button" class="bg-style-tile" data-bg="stars">
+            <span class="bg-tile-preview bg-prev-stars"></span>
+            <span data-i18n="configurator.bg_stars">Stars</span>
+          </button>
+          <button type="button" class="bg-style-tile" data-bg="geometric">
+            <span class="bg-tile-preview bg-prev-geometric"></span>
+            <span data-i18n="configurator.bg_geometric">Geometric</span>
+          </button>
+          <button type="button" class="bg-style-tile" data-bg="ripple">
+            <span class="bg-tile-preview bg-prev-ripple"></span>
+            <span data-i18n="configurator.bg_ripple">Ripple</span>
+          </button>
+          <button type="button" class="bg-style-tile" data-bg="fireflies">
+            <span class="bg-tile-preview bg-prev-fireflies"></span>
+            <span data-i18n="configurator.bg_fireflies">Fireflies</span>
+          </button>
+          <button type="button" class="bg-style-tile" data-bg="aurora">
+            <span class="bg-tile-preview bg-prev-aurora"></span>
+            <span data-i18n="configurator.bg_aurora">Aurora</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="drawer-section">
+        <label data-i18n="configurator.lang_label"></label>
+        <div class="lang-toggle">
+          <button type="button" class="lang-btn active" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="zh-TW">中文</button>
+        </div>
+      </div>
+
+      <div class="drawer-section">
+        <label data-i18n="configurator.contact_label"></label>
+        <input type="text" id="contact-name" data-i18n-placeholder="configurator.name_placeholder" placeholder="Full Name">
+        <input type="email" id="contact-email" data-i18n-placeholder="configurator.email_placeholder" placeholder="Email Address">
+        <input type="tel" id="contact-phone" data-i18n-placeholder="configurator.phone_placeholder" placeholder="Phone Number">
+        <input type="text" id="contact-codename" data-i18n-placeholder="configurator.codename_placeholder" placeholder="Agent Code">
+        <div id="form-errors" class="form-errors"></div>
+      </div>
+
+    </div>
+    <div class="drawer-footer">
+      <button type="button" id="btn-send" class="btn-primary btn-send" data-i18n="configurator.send"></button>
+    </div>
+  </aside>
+
+
+
+  <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+  <!-- ââ Scripts (order matters: i18n â app â configurator) ââââââââââââ -->
+  <script src="https://cdn.jsdelivr.net/npm/i18next@23/i18next.min.js" defer></script>
+  <script src="js/i18n.js?v=34" defer></script>
+  <script src="js/app.js?v=34" defer></script>
+  <script src="js/configurator.js?v=34" defer></script>
+  <script src="../js/shared-nav.js?v=34" defer></script>
+
+</body>
+</html>

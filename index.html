@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ── Primary Meta ─────────────────────────────────────────────────── -->
+  <title>Web人 — Modern Web Development | SEO, GEO, AIO &amp; i18n Specialists</title>
+  <meta name="description" content="We build premium, high-performance websites optimised for search engines, AI discovery (GEO/AIO), and global audiences with native multi-language support.">
+  <meta name="author" content="Web人">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0d9488">
+  <link rel="canonical" href="https://webren.dev/">
+
+  <!-- ── Open Graph ────────────────────────────────────────────────────── -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://webren.dev/">
+  <meta property="og:title" content="Web人 — Modern Web Development">
+  <meta property="og:description" content="Premium websites engineered for SEO, AI discovery, and global audiences. i18n-native from day one.">
+  <meta property="og:image" content="https://webren.dev/og-image.jpg">
+  <meta property="og:site_name" content="Web人">
+
+  <!-- ── Twitter Card ──────────────────────────────────────────────────── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Web人 — Modern Web Development">
+  <meta name="twitter:description" content="Premium websites built for SEO, GEO, AIO & multilingual audiences.">
+  <meta name="twitter:image" content="https://webren.dev/og-image.jpg">
+
+  <!-- ── Hreflang (i18n SEO) ───────────────────────────────────────────── -->
+  <link rel="alternate" hreflang="en" href="https://webren.dev/">
+  <link rel="alternate" hreflang="zh-TW" href="https://webren.dev/?lang=zh-TW">
+  <link rel="alternate" hreflang="x-default" href="https://webren.dev/?lang=zh-TW">
+
+  <!-- ── Fonts ─────────────────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+  <!-- ── Styles ────────────────────────────────────────────────────────── -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shared-nav.css?v=30">
+
+  <!-- ── Structured Data ───────────────────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://webren.dev/#organization",
+        "name": "Web人",
+        "url": "https://webren.dev/",
+        "description": "Modern web development studio specialising in SEO, GEO, AIO, and multi-language websites.",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "availableLanguage": ["English", "Chinese"]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://webren.dev/#website",
+        "url": "https://webren.dev/",
+        "name": "Web人",
+        "publisher": { "@id": "https://webren.dev/#organization" }
+      },
+      {
+        "@type": "Service",
+        "name": "Web Development Services",
+        "provider": { "@id": "https://webren.dev/#organization" },
+        "serviceType": ["Web Development", "SEO", "GEO Optimization", "Multilingual Websites"],
+        "areaServed": "Worldwide"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://webren.dev/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is GEO (Generative Engine Optimization)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "GEO is the practice of optimising website content to appear in AI-generated answers from tools like ChatGPT, Perplexity, and Google SGE. It involves entity-based content structures and AI-indexable markup."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you build multilingual websites?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Every website we build includes native i18n support with proper hreflang tags, locale-aware routing, and professional translations."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+<a href="#hero" class="skip-link">Skip to content</a>
+
+<!-- Language switch overlay for dropdown animation -->
+<div id="lang-overlay" aria-hidden="true"></div>
+
+<!-- Cursor glow -->
+<div id="cursor-glow" aria-hidden="true"></div>
+
+
+<!-- ───────────────────────────────────────────────────────────────────────────
+     HERO
+──────────────────────────────────────────────────────────────────────────── -->
+<section id="hero" aria-labelledby="hero-title" tabindex="-1">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+  <div class="container hero-content">
+
+    <div class="badge badge-teal reveal">
+      <span class="badge-dot"></span>
+      <span data-i18n="hero.badge">Modern Web Development</span>
+    </div>
+
+    <h1 id="hero-title">
+      <span class="reveal" data-i18n="hero.title">Websites Built for</span><br>
+      <span class="gradient-text reveal" data-i18n="hero.title_highlight">AI Discovery &amp; Global Reach</span>
+    </h1>
+
+    <p class="reveal" data-i18n="hero.subtitle">
+      Professional websites with built-in SEO, GEO, and native bilingual support. Built to rank, built to convert.
+    </p>
+
+    <div class="hero-actions reveal">
+      <a href="https://wa.me/6285183005811" class="btn-primary" target="_blank" rel="noopener noreferrer">
+        <span>💬</span>
+        <span data-i18n="hero.cta_primary">Start Your Project</span>
+      </a>
+      <a href="#services" class="btn-secondary">
+        <span data-i18n="hero.cta_secondary">View Services</span>
+        <span>↓</span>
+      </a>
+      <a href="pricing/" class="btn-secondary" data-i18n="hero.cta_pricing">View Pricing</a>
+      <a href="demo/" class="btn-secondary" data-i18n="hero.cta_demo">Try Demo</a>
+    </div>
+
+    <div class="hero-stats reveal">
+      <div class="stat-item">
+        <span class="stat-number" data-count="50" data-suffix="+">0+</span>
+        <span class="stat-label" data-i18n="hero.stat_1_label">Projects Delivered</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-count="2" data-suffix="+">0+</span>
+        <span class="stat-label" data-i18n="hero.stat_2_label">Languages Built In</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="scroll-indicator" aria-hidden="true">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────────────────────────────────
+     SERVICES
+──────────────────────────────────────────────────────────────────────────── -->
+<section id="services" aria-labelledby="services-title">
+  <div class="container">
+
+    <header class="section-header">
+      <div class="badge badge-teal reveal">
+        <span class="badge-dot"></span>
+        <span data-i18n="services.badge">What We Build</span>
+      </div>
+      <h2 id="services-title" class="reveal" data-i18n="services.title">Full-Stack Web Services</h2>
+      <p class="reveal" data-i18n="services.subtitle">From landing pages to complex web applications — we engineer digital experiences that drive results.</p>
+    </header>
+
+    <div class="services-grid">
+
+      <article class="service-card reveal">
+        <div class="service-icon teal" aria-hidden="true">🔍</div>
+        <h3 data-i18n="services.item_1_title">SEO Engineering</h3>
+        <p data-i18n="services.item_1_desc">Technical SEO from the ground up. Schema markup, Core Web Vitals optimization, semantic HTML, and structured data that search engines love.</p>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-icon violet" aria-hidden="true">🤖</div>
+        <h3 data-i18n="services.item_2_title">GEO &amp; AIO Ready</h3>
+        <p data-i18n="services.item_2_desc">Generative Engine Optimization — built for AI search (ChatGPT, Perplexity, Gemini). Entity-based content structures and AI-indexable markup.</p>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-icon cyan" aria-hidden="true">🌐</div>
+        <h3 data-i18n="services.item_3_title">Multi-Language (i18n)</h3>
+        <p data-i18n="services.item_3_desc">Native internationalization with hreflang tags, locale-aware routing, and professional translations. Reach every market.</p>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-icon emerald" aria-hidden="true">⚡</div>
+        <h3 data-i18n="services.item_4_title">Performance First</h3>
+        <p data-i18n="services.item_4_desc">100/100 Lighthouse scores. Sub-2s load times. Optimized assets, lazy loading, and CDN strategies for blazing-fast delivery.</p>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-icon teal" aria-hidden="true">📱</div>
+        <h3 data-i18n="services.item_5_title">Responsive Design</h3>
+        <p data-i18n="services.item_5_desc">Pixel-perfect across all devices. Mobile-first architecture with fluid layouts that look stunning from phone to 4K.</p>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-icon violet" aria-hidden="true">💻</div>
+        <h3 data-i18n="services.item_6_title">Modern Tech Stack</h3>
+        <p data-i18n="services.item_6_desc">Clean, maintainable code. Vanilla HTML/CSS/JS, React, Next.js, or whatever fits your project — we build it right.</p>
+      </article>
+
+      <article class="service-card service-card--highlight reveal">
+        <div class="service-icon cyan" aria-hidden="true">✉️</div>
+        <span class="service-new-badge" data-i18n="services.new_badge">New</span>
+        <h3 data-i18n="services.item_7_title">Email Service</h3>
+        <p data-i18n="services.item_7_desc">Professional email setup via Gmail — send &amp; receive from your own domain (noreply@yourdomain.com). Branded, reliable, and hassle-free.</p>
+      </article>
+
+      <article class="service-card service-card--highlight reveal">
+        <div class="service-icon emerald" aria-hidden="true">📊</div>
+        <span class="service-new-badge" data-i18n="services.new_badge">New</span>
+        <h3 data-i18n="services.item_8_title">Form → Google Sheets</h3>
+        <p data-i18n="services.item_8_desc">Contact forms that save submissions to Google Sheets and auto-reply with a branded email — "We'll get back to you shortly." Zero friction, full data control.</p>
+      </article>
+
+      <article class="service-card service-card--highlight reveal">
+        <div class="service-icon teal" aria-hidden="true">🛡️</div>
+        <span class="service-new-badge" data-i18n="services.new_badge">New</span>
+        <h3 data-i18n="services.item_9_title">Cloudflare Security</h3>
+        <p data-i18n="services.item_9_desc">Your site protected by Cloudflare — DDoS protection, SSL/TLS encryption, WAF firewall. Trusted by millions of websites worldwide.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────────────────────────────────
+     PORTFOLIO
+──────────────────────────────────────────────────────────────────────────── -->
+<section id="portfolio" aria-labelledby="portfolio-title">
+  <div class="container">
+
+    <header class="section-header">
+      <div class="badge badge-violet reveal">
+        <span class="badge-dot"></span>
+        <span data-i18n="portfolio.badge">Our Work</span>
+      </div>
+      <h2 id="portfolio-title" class="reveal" data-i18n="portfolio.title">Live Portfolio</h2>
+      <p class="reveal" data-i18n="portfolio.subtitle">Real websites, real results — crafted with care and built to last.</p>
+    </header>
+
+    <div class="portfolio-grid">
+
+      <!-- Project 1: Rayantion.me -->
+      <article class="portfolio-card reveal">
+        <div class="portfolio-card-header portfolio-header--teal">
+          <span class="portfolio-live-badge">🔴 LIVE</span>
+          <div class="portfolio-browser-dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="portfolio-url-bar">
+            <span class="portfolio-lock" aria-hidden="true">🔒</span>
+            <span class="portfolio-url-text">rayantion.me</span>
+          </div>
+          <div class="portfolio-preview-icon" aria-hidden="true">🌟</div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-tags">
+            <span class="ptag ptag-teal" data-i18n="portfolio.tag_personal">Personal</span>
+            <span class="ptag ptag-violet">SEO</span>
+            <span class="ptag ptag-cyan">i18n</span>
+          </div>
+          <h3 data-i18n="portfolio.project_1_title">Rayantion.me</h3>
+          <p data-i18n="portfolio.project_1_desc">A sleek personal website showcasing portfolio, skills, and services — optimized for SEO and global audiences with multi-language support.</p>
+          <a href="https://rayantion.me" target="_blank" rel="noopener noreferrer" class="portfolio-link" aria-label="Visit Rayantion.me">
+            <span data-i18n="portfolio.visit">Visit Site</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 12L12 2M12 2H6M12 2v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Project 2: Decisionfield.online -->
+      <article class="portfolio-card reveal">
+          <div class="portfolio-card-header portfolio-header--violet">
+          <span class="portfolio-live-badge">🔴 LIVE</span>
+          <div class="portfolio-browser-dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="portfolio-url-bar">
+            <span class="portfolio-lock" aria-hidden="true">🔒</span>
+            <span class="portfolio-url-text">decisionfield.online</span>
+          </div>
+          <div class="portfolio-preview-icon" aria-hidden="true">🎯</div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-tags">
+            <span class="ptag ptag-violet" data-i18n="portfolio.tag_business">Business</span>
+            <span class="ptag ptag-teal">SEO</span>
+            <span class="ptag ptag-emerald" data-i18n="portfolio.tag_forms">Forms</span>
+          </div>
+          <h3 data-i18n="portfolio.project_2_title">Decisionfield.online</h3>
+          <p data-i18n="portfolio.project_2_desc">A professional business website with integrated contact forms, Google Sheets data capture, and auto-reply email confirmation.</p>
+          <a href="https://decisionfield.online" target="_blank" rel="noopener noreferrer" class="portfolio-link" aria-label="Visit Decisionfield.online">
+            <span data-i18n="portfolio.visit">Visit Site</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 12L12 2M12 2H6M12 2v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Project 3: Thetaindo.co.id -->
+      <article class="portfolio-card reveal">
+          <div class="portfolio-card-header portfolio-header--cyan">
+          <span class="portfolio-live-badge">🔴 LIVE</span>
+          <div class="portfolio-browser-dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="portfolio-url-bar">
+            <span class="portfolio-lock" aria-hidden="true">🔒</span>
+            <span class="portfolio-url-text">thetaindo.co.id</span>
+          </div>
+          <div class="portfolio-preview-icon" aria-hidden="true">🏢</div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-tags">
+            <span class="ptag ptag-cyan" data-i18n="portfolio.tag_corporate">Corporate</span>
+            <span class="ptag ptag-teal">SEO</span>
+            <span class="ptag ptag-violet">GEO</span>
+          </div>
+          <h3 data-i18n="portfolio.project_3_title">Thetaindo.co.id</h3>
+          <p data-i18n="portfolio.project_3_desc">An Indonesian corporate website built for local and international markets, featuring GEO optimization and responsive design for all devices.</p>
+          <a href="https://thetaindo.co.id" target="_blank" rel="noopener noreferrer" class="portfolio-link" aria-label="Visit Thetaindo.co.id">
+            <span data-i18n="portfolio.visit">Visit Site</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 12L12 2M12 2H6M12 2v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────────────────────────────────
+     FEATURES
+──────────────────────────────────────────────────────────────────────────── -->
+<section id="features" aria-labelledby="features-title">
+  <div class="container">
+
+    <header class="section-header">
+      <div class="badge badge-violet reveal">
+        <span class="badge-dot"></span>
+        <span data-i18n="features.badge">Why Choose Us</span>
+      </div>
+      <h2 id="features-title" class="reveal" data-i18n="features.title">Built for the Modern Web</h2>
+      <p class="reveal" data-i18n="features.subtitle">We don't just make websites pretty — we make them work harder for your business.</p>
+    </header>
+
+    <div class="features-grid">
+
+      <div class="feature-item reveal">
+        <div class="feature-icon" aria-hidden="true">🧠</div>
+        <div class="feature-body">
+          <h3 data-i18n="features.item_1_title">AI Search Optimized</h3>
+          <p data-i18n="features.item_1_desc">Your site surfaces in ChatGPT, Perplexity, and Google SGE answers. GEO is the next frontier — we're already there.</p>
+        </div>
+      </div>
+
+      <div class="feature-item reveal">
+        <div class="feature-icon" aria-hidden="true">🌏</div>
+        <div class="feature-body">
+          <h3 data-i18n="features.item_2_title">Global-Ready i18n</h3>
+          <p data-i18n="features.item_2_desc">Every site we build supports multiple languages from day one. Switch between EN and 中文 right on this page.</p>
+        </div>
+      </div>
+
+      <div class="feature-item reveal">
+        <div class="feature-icon" aria-hidden="true">✨</div>
+        <div class="feature-body">
+          <h3 data-i18n="features.item_3_title">Clean, Semantic Code</h3>
+          <p data-i18n="features.item_3_desc">No bloat, no frameworks you don't need. Every line of code serves a purpose and is maintainable long-term.</p>
+        </div>
+      </div>
+
+      <div class="feature-item reveal">
+        <div class="feature-icon" aria-hidden="true">📊</div>
+        <div class="feature-body">
+          <h3 data-i18n="features.item_4_title">Structured Data &amp; Schema</h3>
+          <p data-i18n="features.item_4_desc">Rich results in Google Search. FAQ, How-To, Organization, and LocalBusiness schemas implemented correctly.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────────────────────────────────
+     SNEAK PEEK — Option A Upgraded
+──────────────────────────────────────────────────────────────────────────── -->
+<section id="sneak-peek" aria-labelledby="sneak-title">
+  <div class="container">
+    <div class="sneak-inner reveal">
+
+      <div class="sneak-content">
+        <div class="sneak-label-row">
+          <span class="badge badge-violet">
+            <span class="badge-dot"></span>
+            <span data-i18n="sneak.badge">Coming Soon</span>
+          </span>
+          <span class="sneak-tag" data-i18n="sneak.label">Option A Upgraded</span>
+        </div>
+        <h2 id="sneak-title" data-i18n="sneak.title">Digital Menu &amp; Order System</h2>
+        <p data-i18n="sneak.desc">The next evolution of Option A — let restaurants showcase menus, accept orders, and manage the kitchen. Customers scan QR codes to browse, order, and pay from their phones.</p>
+        <ul class="sneak-features">
+          <li><span class="sneak-bullet">🍽️</span><span data-i18n="sneak.f1">QR Code Menu — Every table gets its own menu</span></li>
+          <li><span class="sneak-bullet">📱</span><span data-i18n="sneak.f2">Easy Ordering — Customers order from their phone</span></li>
+          <li><span class="sneak-bullet">👨‍🍳</span><span data-i18n="sneak.f3">Kitchen Dashboard — Orders appear instantly</span></li>
+          <li><span class="sneak-bullet">📩</span><span data-i18n="sneak.f4">Email Receipts — Automatic PDF receipts</span></li>
+        </ul>
+        <p class="sneak-subtext" data-i18n="sneak.subtext">For current Option A clients — seamless upgrade available</p>
+        <span class="sneak-cta" data-i18n="sneak.cta">Coming 2026</span>
+      </div>
+
+      <div class="sneak-visual" aria-hidden="true">
+        <div class="sneak-phone">
+          <div class="sneak-phone-bar"></div>
+          <div class="sneak-phone-screen">
+            <div class="sneak-qr"></div>
+            <div class="sneak-menu-items">
+              <div class="sneak-menu-item">
+                <div class="sneak-menu-dot"></div>
+                <div class="sneak-menu-lines">
+                  <div class="sneak-menu-line"></div>
+                  <div class="sneak-menu-line short"></div>
+                </div>
+              </div>
+              <div class="sneak-menu-item">
+                <div class="sneak-menu-dot"></div>
+                <div class="sneak-menu-lines">
+                  <div class="sneak-menu-line"></div>
+                  <div class="sneak-menu-line short"></div>
+                </div>
+              </div>
+            </div>
+            <div class="sneak-order-btn"></div>
+          </div>
+        </div>
+        <div class="sneak-ping sneak-ping-1"></div>
+        <div class="sneak-ping sneak-ping-2"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────────────────────────────────
+     DEMO SECTION
+──────────────────────────────────────────────────────────────────────────── -->
+<section id="demo" aria-labelledby="demo-title">
+  <div class="container">
+    <div class="demo-card reveal">
+      <div class="badge badge-teal">
+        <span class="badge-dot"></span>
+        <span data-i18n="demo.badge">Live Demo</span>
+      </div>
+      <h2 id="demo-title" data-i18n="demo.title">i18n in Action</h2>
+      <p data-i18n="demo.subtitle">This entire page is available in multiple languages. Toggle between English and Traditional Chinese using the button above.</p>
+
+      <div class="demo-lang-big">
+        <button type="button" class="lang-btn active" data-lang="en">🇬🇧 English</button>
+        <button type="button" class="lang-btn" data-lang="zh-TW">🇹🇼 繁體中文</button>
+      </div>
+
+      <div class="demo-note">
+        <span>ℹ️</span>
+        <span data-i18n="demo.note">Built with i18next — the industry-standard internationalization library.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────────────────────────────────
+     CONTACT
+──────────────────────────────────────────────────────────────────────────── -->
+<section id="contact" aria-labelledby="contact-title">
+  <div class="container contact-inner">
+
+    <div class="contact-text">
+      <div class="badge reveal">
+        <span class="badge-dot"></span>
+        <span data-i18n="contact.badge">Get In Touch</span>
+      </div>
+      <h2 id="contact-title" class="reveal" data-i18n="contact.title">Ready to Build Something Great?</h2>
+      <p class="reveal" data-i18n="contact.subtitle">Let's talk about your project. We respond fast and give honest, straightforward advice.</p>
+
+      <ul class="contact-features reveal">
+        <li>
+          <div class="check-icon" aria-hidden="true">✓</div>
+          <span data-i18n="contact.feature_1">Free project consultation</span>
+        </li>
+        <li>
+          <div class="check-icon" aria-hidden="true">✓</div>
+          <span data-i18n="contact.feature_2">No-commitment quote</span>
+        </li>
+        <li>
+          <div class="check-icon" aria-hidden="true">✓</div>
+          <span data-i18n="contact.feature_3">Fast turnaround times</span>
+        </li>
+        <li>
+          <div class="check-icon" aria-hidden="true">✓</div>
+          <span data-i18n="contact.feature_4">Transparent pricing</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="contact-card reveal">
+      <h3 data-i18n="contact.card_title">💬 WhatsApp</h3>
+      <p data-i18n="contact.card_subtitle">+62 851-8300-5811</p>
+
+      <a href="https://wa.me/6285183005811" class="wa-button" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp">
+        <span class="wa-icon">📲</span>
+        <span data-i18n="contact.whatsapp_cta">Chat on WhatsApp</span>
+      </a>
+
+      <p class="wa-note" data-i18n="contact.whatsapp_note">Available Mon–Sat, 9am–6pm WIB</p>
+
+      <a href="https://line.me/ti/p/~rayantion" class="wa-button" target="_blank" rel="noopener noreferrer" aria-label="Contact on LINE" style="margin-top:8px; background:#00B900;">
+        <span class="wa-icon">💬</span>
+        <span data-i18n="contact.line_cta">Chat on LINE</span>
+      </a>
+
+      <div class="tech-tags">
+        <span class="tech-tag">HTML5</span>
+        <span class="tech-tag">CSS3</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">SEO</span>
+        <span class="tech-tag">GEO</span>
+        <span class="tech-tag">i18n</span>
+        <span class="tech-tag">Three.js</span>
+        <span class="tech-tag">Schema.org</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ───────────────────────────────────────────────────────────────────────────
+     SCRIPTS (CDN)
+──────────────────────────────────────────────────────────────────────────── -->
+<!-- Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+        async
+        onload="window.dispatchEvent(new Event('three-loaded'))"></script>
+
+<!-- App Scripts -->
+<script src="js/shared-nav.js?v=30"></script>
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+
+<!-- Transition overlays -->
+<div id="page-transition" class="active" aria-hidden="true"></div>
+
+</body>
+</html>
