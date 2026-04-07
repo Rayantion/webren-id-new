@@ -2,8 +2,8 @@
 // Loads locale JSON files and handles language switching
 
 const I18N = (() => {
-  let currentLang = 'en';
-  const supportedLangs = ['en', 'zh-CN'];
+  let currentLang = 'id';
+  const supportedLangs = ['id', 'en', 'zh-CN'];
   const cache = {};
 
   async function loadLocale(lang) {
@@ -70,7 +70,9 @@ const I18N = (() => {
 
   function detectLang() {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    return tz && tz.includes('Jakarta') ? 'zh-CN' : 'en';
+    // Indonesia timezones → default to 'id'
+    if (tz && (tz.includes('Jakarta') || tz.includes('Makassar') || tz.includes('Jayapura'))) return 'id';
+    return 'en';
   }
 
   async function init() {
