@@ -113,6 +113,21 @@
     "built_with": "Dibuat dengan kode bersih dan perhatian pada detail.",
     "privacy": "Kebijakan Privasi"
   },
+  "pricing": {
+    "faq": {
+      "title": "Pertanyaan yang Sering Diajukan",
+      "q1": "Apa perbedaan Paket A dan Paket B?",
+      "a1": "Paket A menggunakan template pra-buat yang dikustomisasi dengan branding, warna, dan konten Anda — cepat dan terjangkau. Paket B adalah website custom yang dirancang dari awal sesuai visi Anda, dengan kebebasan kreatif penuh.",
+      "q2": "Bisakah coba sebelum beli?",
+      "a2": "Bisa! Gunakan Demo langsung untuk melihat preview dan mengkustomisasi website Paket A Anda. Pilih warna, font, dan jenis bisnis, lalu kirim preferensi Anda langsung ke kami.",
+      "q3": "Apakah biaya bulanan itu berkelanjutan?",
+      "a3": "Paket A adalah langganan bulanan yang mencakup hosting, maintenance, dan support. Paket B memiliki biaya setup sekali bayar ditambah Rp 1.500.000/tahun untuk maintenance dan update ongoing.",
+      "q4": "Apakah harga sudah termasuk domain?",
+      "a4": "Domain tidak termasuk dalam paket — domain milik Anda sendiri. Kami bantu registrasi dan Renewal domain agar Anda tetap punya kendali penuh atas domain Anda.",
+      "q5": "Seberapa cepat website bisa live?",
+      "a5": "Website Paket A biasanya live dalam 3–7 hari kerja setelah kami terima konten Anda. Paket B tergantung kompleksitas — biasanya 2–4 minggu."
+    }
+  },
   "faq": {
     "badge": "Pertanyaan Umum",
     "title": "Pertanyaan yang Sering Diajukan",

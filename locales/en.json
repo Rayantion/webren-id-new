@@ -108,6 +108,21 @@
     "subtext": "For current Option A clients — seamless upgrade available",
     "cta": "Coming 2026"
   },
+  "pricing": {
+    "faq": {
+      "title": "Frequently Asked",
+      "q1": "What's the difference between Option A and Option B?",
+      "a1": "Option A uses pre-built templates customised with your branding, colors, and content — fast and affordable. Option B is a fully bespoke website designed from scratch to your exact vision, with complete creative freedom.",
+      "q2": "Can I try before I buy?",
+      "a2": "Yes! Use the live Demo to preview and customise your Option A website. Pick colors, fonts, and business type, then send your preferences directly to us.",
+      "q3": "Is the monthly fee ongoing?",
+      "a3": "Option A is a monthly subscription that covers hosting, maintenance, and support. Option B has a one-time setup fee plus Rp 1.500.000/year for ongoing maintenance and updates.",
+      "q4": "Does the price include a domain?",
+      "a4": "Domain registration and renewal are billed separately — the domain belongs to you. We guide you through the process and help you pick the right domain.",
+      "q5": "How fast can my site go live?",
+      "a5": "Option A sites typically go live within 3–7 business days after we receive your content. Option B timelines depend on complexity — usually 2–4 weeks."
+    }
+  },
   "faq": {
     "badge": "Common Questions",
     "title": "Frequently Asked Questions",
