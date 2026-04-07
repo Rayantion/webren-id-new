@@ -108,9 +108,25 @@
     "subtext": "For current Option A clients — seamless upgrade available",
     "cta": "Coming 2026"
   },
-  "footer": {
-    "copyright": "© 2025 Web人. All rights reserved.",
-    "built_with": "Built with clean code & attention to detail.",
-    "privacy": "Privacy Policy"
+  "faq": {
+    "badge": "Common Questions",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Honest answers to the questions Indonesian business owners ask most when getting a professional website.",
+    "q1": "How much does a website cost in Indonesia?",
+    "a1": "Website costs in Indonesia vary widely depending on complexity. A simple company profile website starts from Rp 500,000 to Rp 2,000,000. An online store with shopping cart and payment features starts from Rp 3,000,000 to Rp 10,000,000. For a full custom website with complete features, prices can reach Rp 15,000,000 or more. Web人 Indonesia offers affordable packages with premium results equivalent to websites costing far more. Free consultation is available to help you choose the right package.",
+    "q2": "How long does it take to build a website?",
+    "a2": "Build time depends on project complexity. A simple company profile website can be completed in 3–7 business days. An online store with 10–50 products typically takes 1–2 weeks. Custom websites with full features or web applications require 2–4 weeks or more. Timelines are discussed together at the start so expectations are aligned.",
+    "q3": "Do I need to know coding to manage the website?",
+    "a3": "Not at all. Every website built by Web人 Indonesia comes with a user-friendly management dashboard. You can update content, photos, and products yourself without writing a single line of code. We also provide tutorials and complete documentation in Indonesian so you feel comfortable managing your own website.",
+    "q4": "Can the website appear on Google (SEO)?",
+    "a4": "Yes, every website we build is SEO-optimized from the ground up. We implement technical SEO, schema markup (FAQPage, LocalBusiness, Organization), semantic HTML, Core Web Vitals optimization, and proper meta tags for Google. For Indonesian local businesses, we also optimize Google Business Profile and local SEO so your business is easier to find by potential customers in your area.",
+    "q5": "What's the difference between web design and web development?",
+    "a5": "Web design focuses on visual appearance and user experience (UX/UI) — colors, typography, and layout. Web development focuses on the code behind the website that makes all features work. Web人 Indonesia provides both: professional designers for attractive and compelling visuals, and experienced developers for clean, fast code that is easy to extend in the future.",
+    "q6": "Can you build a full-featured online store?",
+    "a6": "Absolutely. Web人 Indonesia specializes in building full-featured online stores: product catalog, shopping cart, checkout, payment integration (Midtrans, Bank Transfer, GoPay, OVO, Dana), order tracking, and an admin dashboard for inventory management. We also provide Google Sheets integration for automatic order recording and automatic confirmation emails to customers.",
+    "q7": "Why choose Web人 Indonesia over other providers?",
+    "a7": "Web人 Indonesia combines three core strengths: (1) Indonesian SEO that genuinely improves your business ranking on Google, (2) GEO and AIO optimization so your website also appears in AI answers like ChatGPT, Perplexity, and Google SGE, and (3) native i18n that lets your website display in Indonesian and English with search engine-friendly hreflang tags. The result — a website that is not just beautiful to look at but also genuinely brings in real customers.",
+    "q8": "Is support available in Indonesian?",
+    "a8": "Yes, all communication with Web人 Indonesia can be done entirely in Indonesian. Free consultation, proposal presentations, development process, and after-sales technical support are all available in Indonesian. We understand the needs of Indonesian local businesses and use terminology familiar to Indonesian entrepreneurs."
   }
 }
