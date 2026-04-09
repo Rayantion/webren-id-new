@@ -1,7 +1,7 @@
 {
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd \\\"C:/claude/webren-id-new\\\" && git config user.email \\\"aaron@webren.tw\\\" && git config user.name \\\"Aaron\\\" && git add .github/workflows/pages.yml && git commit -m \\\"Add GitHub Pages dep...",
-  "error": "Exit code 1\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   .omc/state/last-tool-error.json\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")",
-  "timestamp": "2026-04-07T10:31:39.473Z",
+  "tool_name": "mcp__plugin_supabase_supabase__apply_migration",
+  "tool_input_preview": "{\"name\":\"add_clients_type_column\",\"project_id\":\"gfcncubcurtnzupycwnf\",\"query\":\"ALTER TABLE clients ADD COLUMN type TEXT DEFAULT 'store';\"}",
+  "error": "{\"error\":{\"name\":\"HttpException\",\"message\":\"Failed to apply database migration: ERROR:  42701: column \\\"type\\\" of relation \\\"clients\\\" already exists\\n\"}}",
+  "timestamp": "2026-04-09T12:31:25.305Z",
   "retry_count": 1
 }
