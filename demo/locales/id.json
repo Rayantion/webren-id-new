@@ -48,7 +48,8 @@
     },
     "gallery": {
       "badge": "Karya Kami",
-      "title": "Galeri"
+      "title": "Galeri",
+      "subtitle": "Lihat proyek terbaru kami"
     },
     "features": {
       "badge": "Mengapa Memilih Kami",
@@ -175,13 +176,14 @@
     "email_label": "Alamat Email",
     "message_label": "Pesan",
     "submit": "Kirim Pesan",
+    "address": "Jl. Sudirman No. 123, Jakarta Selatan",
     "success": "Pesan terkirim! Kami akan segera menghubungi Anda.",
     "error_required": "Kolom ini wajib diisi.",
     "error_email": "Masukkan alamat email yang valid."
   },
   "footer": {
     "tagline": "Ini adalah situs demo oleh Web人.",
-    "copyright": "© 2025 Web人. Hak cipta dilindungi.",
+    "copyright": "© 2026 Web人. Hak cipta dilindungi.",
     "counter_today": "Hari Ini",
     "counter_yesterday": "Kemarin",
     "counter_lastmonth": "Bulan Lalu",
@@ -229,6 +231,9 @@
     "name_placeholder": "Nama Lengkap",
     "email_placeholder": "Alamat Email",
     "phone_placeholder": "Nomor Telepon",
+    "gmaps_placeholder": "Tautan Google Maps (opsional)",
+    "website_placeholder": "Tautan Situs Web (opsional)",
+    "about_placeholder": "Ceritakan tentang perusahaan Anda",
     "codename_placeholder": "Kode Agent (diberikan oleh agen Anda)",
     "send": "Kirim ke Web人",
     "sending": "Mengirim...",

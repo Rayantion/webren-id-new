@@ -48,7 +48,8 @@
     },
     "gallery": {
       "badge": "Our Work",
-      "title": "Gallery"
+      "title": "Gallery",
+      "subtitle": "See our latest projects"
     },
     "features": {
       "badge": "Why Choose Us",
@@ -123,7 +124,7 @@
       "mon_fri_hours": "11:30 AM – 10:00 PM",
       "sat_sun": "Saturday – Sunday",
       "sat_sun_hours": "10:00 AM – 11:00 PM",
-      "address": "123 Demo Street, Taipei City",
+      "address": "Jl. Sudirman No. 123, Jakarta Selatan",
       "phone": "+886 2 1234 5678"
     }
   },
@@ -175,13 +176,14 @@
     "email_label": "Email Address",
     "message_label": "Message",
     "submit": "Send Message",
+    "address": "Jl. Sudirman No. 123, Jakarta Selatan",
     "success": "Message sent! We'll be in touch soon.",
     "error_required": "This field is required.",
     "error_email": "Please enter a valid email address."
   },
   "footer": {
     "tagline": "This is a demo website by Web人.",
-    "copyright": "© 2025 Web人. All rights reserved.",
+    "copyright": "© 2026 Web人. All rights reserved.",
     "counter_today": "Today",
     "counter_yesterday": "Yesterday",
     "counter_lastmonth": "Last Month",
@@ -229,6 +231,9 @@
     "name_placeholder": "Full Name",
     "email_placeholder": "Email Address",
     "phone_placeholder": "Phone Number",
+    "gmaps_placeholder": "Google Maps Link (optional)",
+    "website_placeholder": "Website Link (optional)",
+    "about_placeholder": "Tell us about your company",
     "codename_placeholder": "Agent Code (given by your agent)",
     "send": "Send to Web人",
     "sending": "Sending...",

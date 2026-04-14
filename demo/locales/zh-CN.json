@@ -48,7 +48,8 @@
     },
     "gallery": {
       "badge": "我们的作品",
-      "title": "图库"
+      "title": "图库",
+      "subtitle": "查看我们最新的项目"
     },
     "features": {
       "badge": "为何选择我们",
@@ -175,13 +176,14 @@
     "email_label": "电子邮箱",
     "message_label": "留言",
     "submit": "发送消息",
+    "address": "Jl. Sudirman No. 123, 雅加达南部",
     "success": "消息已发送！我们将尽快与您联系。",
     "error_required": "此字段为必填项。",
     "error_email": "请输入有效的电子邮箱地址。"
   },
   "footer": {
     "tagline": "这是 Web人 的演示网站。",
-    "copyright": "© 2025 Web人. 版权所有。",
+    "copyright": "© 2026 Web人. 版权所有。",
     "counter_today": "今日",
     "counter_yesterday": "昨日",
     "counter_lastmonth": "上月",
@@ -229,6 +231,9 @@
     "name_placeholder": "全名",
     "email_placeholder": "电子邮箱",
     "phone_placeholder": "电话号码",
+    "gmaps_placeholder": "Google 地图链接（选填）",
+    "website_placeholder": "网站链接（选填）",
+    "about_placeholder": "介绍一下您的公司",
     "codename_placeholder": "代理商代码（由您的代理商提供）",
     "send": "发送给 Web人",
     "sending": "发送中...",
