@@ -435,7 +435,7 @@ function initSendButton() {
           body: JSON.stringify({
             contact: { name, email, phone, gmaps, website, about },
             codename,
-            source: '🇮🇩 Indonesia (webren.id)',
+            source: '🇮🇩 Indonesia (id.webren.net)',
             config: {
               mode: config.mode,
               theme: config.theme,
