@@ -1,18 +1,337 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=https://portal.webren.net/">
-  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-  <title>Redirecting — Web人 Portal</title>
-  <style>
-    body { margin: 0; background: #080D16; color: #F1F5F9; font-family: system-ui, sans-serif;
-           display: flex; align-items: center; justify-content: center; min-height: 100dvh; }
-    a { color: #14B8A6; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web人 ID Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <!-- Midtrans Snap SDK (sandbox) — change to app.midtrans.com for production -->
+  <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-6vBqP7mKfnRn2nLp"></script>
 </head>
 <body>
-  <p>Redirecting to <a href="https://portal.webren.net/">portal.webren.net</a>&hellip;</p>
-  <script>window.location.replace('https://portal.webren.net/');</script>
+
+<div id="toast" class="toast hidden"></div>
+
+<div id="loading-overlay" class="loading-overlay hidden">
+  <div class="loading-spinner"></div>
+  <p id="loading-text" data-i18n="loading">Memuat...</p>
+</div>
+
+<!-- ===================== AUTH SCREEN ===================== -->
+<section id="auth-screen">
+  <div class="auth-container">
+    <div class="auth-brand">
+      <span class="logo">Web人</span>
+      <span class="country-badge id">ID</span>
+    </div>
+
+    <!-- Language pills -->
+    <div id="auth-lang-pills" class="lang-pills">
+      <button type="button" class="lang-pill active" data-lang="id">ID</button>
+      <button type="button" class="lang-pill" data-lang="en">EN</button>
+    </div>
+
+    <!-- Auth tabs -->
+    <div class="auth-tabs">
+      <button type="button" class="auth-tab active" data-tab="login" data-i18n="auth.login">Masuk</button>
+      <button type="button" class="auth-tab" data-tab="register" data-i18n="auth.register">Daftar</button>
+    </div>
+
+    <!-- Login form -->
+    <form id="form-login" class="auth-form" autocomplete="on">
+      <div class="form-group">
+        <label for="login-email" data-i18n="auth.email">Email</label>
+        <input type="email" id="login-email" name="email" required autocomplete="email" data-i18n-placeholder="auth.email_placeholder" placeholder="email@contoh.com">
+      </div>
+      <div class="form-group">
+        <label for="login-password" data-i18n="auth.password">Kata Sandi</label>
+        <div class="password-wrap">
+          <input type="password" id="login-password" name="password" required autocomplete="current-password" data-i18n-placeholder="auth.password_placeholder" placeholder="Kata sandi Anda">
+          <button type="button" class="toggle-password" data-target="login-password"><span class="eye-icon">👁</span></button>
+        </div>
+      </div>
+      <div id="login-error" class="form-error hidden"></div>
+      <button type="submit" id="btn-login" class="btn-primary">
+        <span class="btn-text" data-i18n="auth.login">Masuk</span>
+        <span class="btn-loader hidden">⏳</span>
+      </button>
+      <button type="button" id="btn-forgot" class="link-btn" data-i18n="auth.forgot_password">Lupa kata sandi?</button>
+    </form>
+
+    <!-- Register form (role selector) -->
+    <form id="form-register" class="auth-form hidden" autocomplete="on">
+      <div class="role-selector">
+        <button type="button" class="role-btn active" data-role="client" data-i18n="auth.as_client">Sebagai Klien</button>
+        <button type="button" class="role-btn" data-role="agent" data-i18n="auth.as_agent">Sebagai Agen</button>
+      </div>
+      <input type="hidden" id="reg-role" value="client">
+      <div class="form-group">
+        <label for="reg-name" data-i18n="auth.full_name">Nama Lengkap</label>
+        <input type="text" id="reg-name" required autocomplete="name" data-i18n-placeholder="auth.name_placeholder" placeholder="Nama Anda">
+      </div>
+      <div class="form-group">
+        <label for="reg-email" data-i18n="auth.email">Email</label>
+        <input type="email" id="reg-email" required autocomplete="email" data-i18n-placeholder="auth.email_placeholder" placeholder="email@contoh.com">
+      </div>
+      <div class="form-group">
+        <label for="reg-phone" data-i18n="auth.phone">Nomor Telepon</label>
+        <input type="tel" id="reg-phone" autocomplete="tel" data-i18n-placeholder="auth.phone_placeholder" placeholder="08xxxxxxxxxx">
+      </div>
+      <div class="form-group">
+        <label for="reg-password" data-i18n="auth.password">Kata Sandi</label>
+        <div class="password-wrap">
+          <input type="password" id="reg-password" required autocomplete="new-password" data-i18n-placeholder="auth.password_placeholder" placeholder="Min. 8 karakter">
+          <button type="button" class="toggle-password" data-target="reg-password"><span class="eye-icon">👁</span></button>
+        </div>
+        <div id="strength-register" class="strength-bar">
+          <div class="strength-seg"></div><div class="strength-seg"></div>
+          <div class="strength-seg"></div><div class="strength-seg"></div>
+          <span id="strength-label-reg" class="strength-label" data-i18n="auth.password_strength">Kekuatan</span>
+        </div>
+      </div>
+      <div id="reg-error" class="form-error hidden"></div>
+      <div id="reg-success" class="form-success hidden"></div>
+      <button type="submit" id="btn-register" class="btn-primary">
+        <span class="btn-text" data-i18n="auth.register">Daftar</span>
+        <span class="btn-loader hidden">⏳</span>
+      </button>
+    </form>
+
+    <!-- Forgot password form -->
+    <form id="form-forgot" class="auth-form hidden">
+      <p class="form-hint" data-i18n="auth.forgot_hint">Masukkan email Anda untuk mereset kata sandi.</p>
+      <div class="form-group">
+        <label for="forgot-email" data-i18n="auth.email">Email</label>
+        <input type="email" id="forgot-email" required data-i18n-placeholder="auth.email_placeholder" placeholder="email@contoh.com">
+      </div>
+      <div id="forgot-error" class="form-error hidden"></div>
+      <div id="forgot-success" class="form-success hidden"></div>
+      <button type="submit" id="btn-forgot-submit" class="btn-primary">
+        <span class="btn-text" data-i18n="auth.send_reset">Kirim Link Reset</span>
+        <span class="btn-loader hidden">⏳</span>
+      </button>
+      <button type="button" id="btn-back-login-forgot" class="link-btn" data-i18n="auth.back_to_login">Kembali ke Login</button>
+    </form>
+  </div>
+</section>
+
+<!-- ===================== DASHBOARD SCREEN ===================== -->
+<section id="dashboard-screen" class="hidden">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <span class="logo">Web人</span>
+      <span class="country-badge id">ID</span>
+    </div>
+    <div class="header-right">
+      <div class="lang-selector" id="lang-selector">
+        <button type="button" class="lang-current" id="lang-current">
+          <span id="lang-current-label">ID</span>
+          <span class="lang-arrow">▾</span>
+        </button>
+        <div class="lang-dropdown">
+          <button type="button" class="lang-option" data-lang="id">Indonesia</button>
+          <button type="button" class="lang-option" data-lang="en">English</button>
+        </div>
+      </div>
+      <div id="header-user" class="header-user">
+        <span id="header-role-badge" class="role-badge"></span>
+        <span id="header-user-name"></span>
+      </div>
+      <button id="btn-logout" class="btn-ghost" data-i18n="auth.logout">Keluar</button>
+    </div>
+  </header>
+
+  <!-- Client Dashboard -->
+  <div id="client-dashboard" class="dashboard-content hidden">
+    <!-- 7-day payment notification banner -->
+    <div id="payment-warning-banner" class="warning-banner hidden">
+      <span class="warning-icon">⚠️</span>
+      <span id="warning-text" data-i18n="client.payment_due_soon">Pembayaran Anda jatuh tempo dalam 7 hari!</span>
+      <button type="button" id="btn-warning-pay" class="btn-primary btn-sm" data-i18n="client.pay_now">Bayar Sekarang</button>
+    </div>
+    <div class="dash-hero">
+      <h1 data-i18n="client.welcome">Selamat Datang</h1>
+      <p class="dash-subtitle" data-i18n="client.subtitle">Kelola website dan pembayaran Anda</p>
+    </div>
+    <div class="dash-stats" id="client-stats">
+      <div class="stat-card"><span class="stat-value" id="stat-websites">0</span><span class="stat-label" data-i18n="client.websites">Website</span></div>
+      <div class="stat-card"><span class="stat-value" id="stat-due">—</span><span class="stat-label" data-i18n="client.next_due">Jatuh Tempo</span></div>
+      <div class="stat-card"><span class="stat-value" id="stat-total-paid">Rp 0</span><span class="stat-label" data-i18n="client.total_paid">Total Dibayar</span></div>
+    </div>
+    <div class="section-header">
+      <h2 data-i18n="client.my_websites">Website Saya</h2>
+      <button type="button" id="btn-add-website" class="btn-primary btn-sm" data-i18n="client.add_website">+ Tambah Website</button>
+    </div>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead><tr>
+          <th data-i18n="client.website_name">Nama Website</th>
+          <th data-i18n="client.product">Paket</th>
+          <th data-i18n="client.status">Status</th>
+          <th data-i18n="client.domain">Domain</th>
+          <th data-i18n="client.next_due_date">Jatuh Tempo</th>
+        </tr></thead>
+        <tbody id="websites-tbody"><tr><td colspan="5" class="empty-row">Memuat...</td></tr></tbody>
+      </table>
+    </div>
+    <div class="section-header" style="margin-top:2rem">
+      <h2 data-i18n="client.payment_history">Riwayat Pembayaran</h2>
+    </div>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead><tr>
+          <th data-i18n="client.website">Website</th>
+          <th data-i18n="client.amount">Jumlah</th>
+          <th data-i18n="client.cycle">Siklus</th>
+          <th data-i18n="client.method">Metode</th>
+          <th data-i18n="client.payment_status">Status</th>
+          <th data-i18n="client.actions">Aksi</th>
+        </tr></thead>
+        <tbody id="payments-tbody"><tr><td colspan="6" class="empty-row">Memuat...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Add Website Modal -->
+  <div id="add-website-overlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 data-i18n="client.add_website">Tambah Website</h3>
+        <button type="button" id="btn-close-website-modal" class="modal-close">&times;</button>
+      </div>
+      <form id="form-add-website">
+        <div class="form-group">
+          <label for="website-name" data-i18n="client.website_name">Nama Website</label>
+          <input type="text" id="website-name" required data-i18n-placeholder="client.website_name_placeholder" placeholder="Toko Online Saya">
+        </div>
+        <div class="form-group">
+          <label for="website-about" data-i18n="client.about">Tentang</label>
+          <input type="text" id="website-about" data-i18n-placeholder="client.about_placeholder" placeholder="Deskripsi singkat bisnis Anda">
+        </div>
+        <div class="form-group">
+          <label for="website-product" data-i18n="client.product_type">Tipe Produk</label>
+          <select id="website-product">
+            <option value="basic">Basic</option>
+            <option value="professional">Professional</option>
+            <option value="premium">Premium</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="website-domain" data-i18n="client.domain">Domain</label>
+          <input type="text" id="website-domain" data-i18n-placeholder="client.domain_placeholder" placeholder="tokosaya.com">
+        </div>
+        <div id="add-website-error" class="form-error hidden"></div>
+        <button type="submit" class="btn-primary" id="btn-submit-website" data-i18n="client.submit_website">Kirim Permintaan</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Agent Dashboard -->
+  <div id="agent-dashboard" class="dashboard-content hidden">
+    <div class="dash-hero">
+      <h1 data-i18n="agent.welcome">Dashboard Agen</h1>
+      <p class="dash-subtitle" data-i18n="agent.subtitle">Pantau komisi dan klien Anda</p>
+    </div>
+    <div class="dash-stats">
+      <div class="stat-card"><span class="stat-value" id="stat-agent-balance">Rp 0</span><span class="stat-label" data-i18n="agent.commission_balance">Saldo Komisi</span></div>
+      <div class="stat-card"><span class="stat-value" id="stat-agent-clients">0</span><span class="stat-label" data-i18n="agent.clients">Klien</span></div>
+      <div class="stat-card"><span class="stat-value" id="stat-agent-earned">Rp 0</span><span class="stat-label" data-i18n="agent.total_earned">Total Diperoleh</span></div>
+    </div>
+    <div class="section-header">
+      <h2 data-i18n="agent.referral_link">Link Referral</h2>
+      <div class="referral-box">
+        <code id="referral-link">—</code>
+        <button type="button" id="btn-copy-referral" class="btn-ghost" data-i18n="agent.copy">Salin</button>
+      </div>
+    </div>
+    <div class="section-header" style="margin-top:2rem">
+      <h2 data-i18n="agent.my_clients">Klien Saya</h2>
+    </div>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead><tr>
+          <th data-i18n="agent.client_name">Nama Klien</th>
+          <th data-i18n="agent.plan">Paket</th>
+          <th data-i18n="agent.monthly_fee">Biaya Bulanan</th>
+          <th data-i18n="agent.commission">Komisi</th>
+          <th data-i18n="agent.status">Status</th>
+        </tr></thead>
+        <tbody id="agent-clients-tbody"><tr><td colspan="5" class="empty-row">Memuat...</td></tr></tbody>
+      </table>
+    </div>
+    <div class="section-header" style="margin-top:2rem">
+      <h2 data-i18n="agent.commission_history">Riwayat Komisi</h2>
+    </div>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead><tr>
+          <th data-i18n="agent.date">Tanggal</th>
+          <th data-i18n="agent.client">Klien</th>
+          <th data-i18n="agent.amount">Jumlah</th>
+          <th data-i18n="agent.commission_status">Status</th>
+        </tr></thead>
+        <tbody id="commissions-tbody"><tr><td colspan="4" class="empty-row">Memuat...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div id="admin-dashboard" class="dashboard-content hidden">
+    <div class="dash-hero">
+      <h1 data-i18n="admin.welcome">Admin Panel</h1>
+      <p class="dash-subtitle" data-i18n="admin.subtitle">Kelola klien, agen, dan pembayaran</p>
+    </div>
+    <div class="dash-stats">
+      <div class="stat-card"><span class="stat-value" id="stat-admin-clients">0</span><span class="stat-label" data-i18n="admin.total_clients">Total Klien</span></div>
+      <div class="stat-card"><span class="stat-value" id="stat-admin-agents">0</span><span class="stat-label" data-i18n="admin.total_agents">Total Agen</span></div>
+      <div class="stat-card"><span class="stat-value" id="stat-admin-revenue">Rp 0</span><span class="stat-label" data-i18n="admin.total_revenue">Total Pendapatan</span></div>
+    </div>
+    <div class="section-header">
+      <h2 data-i18n="admin.all_clients">Semua Klien</h2>
+    </div>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead><tr>
+          <th data-i18n="admin.client_name">Nama</th>
+          <th data-i18n="admin.email">Email</th>
+          <th data-i18n="admin.agent">Agen</th>
+          <th data-i18n="admin.plan">Paket</th>
+          <th data-i18n="admin.status">Status</th>
+        </tr></thead>
+        <tbody id="admin-clients-tbody"><tr><td colspan="5" class="empty-row">Memuat...</td></tr></tbody>
+      </table>
+    </div>
+    <div class="section-header" style="margin-top:2rem">
+      <h2 data-i18n="admin.allowed_emails">Email yang Diizinkan</h2>
+      <form id="form-add-allowed-email" class="inline-form">
+        <input type="email" id="admin-email-input" placeholder="agent@email.com" required>
+        <label class="checkbox-label"><input type="checkbox" id="admin-email-is-admin"> <span data-i18n="admin.is_admin">Admin</span></label>
+        <button type="submit" class="btn-primary btn-sm" data-i18n="admin.add_email">Tambah</button>
+      </form>
+    </div>
+    <div id="admin-email-error" class="form-error hidden"></div>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead><tr>
+          <th data-i18n="admin.email">Email</th>
+          <th data-i18n="admin.role_col">Peran</th>
+          <th data-i18n="admin.added">Ditambahkan</th>
+          <th data-i18n="admin.actions">Aksi</th>
+        </tr></thead>
+        <tbody id="admin-emails-tbody"><tr><td colspan="4" class="empty-row">Memuat...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+
+<script src="js/app.js"></script>
 </body>
 </html>
