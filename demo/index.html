@@ -770,14 +770,14 @@
 
       <div class="drawer-section">
         <label data-i18n="configurator.contact_label"></label>
-        <input type="text" id="contact-name" aria-label="Full Name" data-i18n-placeholder="configurator.name_placeholder" placeholder="Full Name">
-        <input type="email" id="contact-email" aria-label="Email Address" data-i18n-placeholder="configurator.email_placeholder" placeholder="Email Address">
-        <input type="tel" id="contact-phone" aria-label="Phone Number" data-i18n-placeholder="configurator.phone_placeholder" placeholder="Phone Number">
-        <input type="url" id="contact-gmaps" aria-label="Google Maps Link" data-i18n-placeholder="configurator.gmaps_placeholder" placeholder="Google Maps Link (optional)">
-        <input type="url" id="contact-website" aria-label="Website Link" data-i18n-placeholder="configurator.website_placeholder" placeholder="Website Link (optional)">
-        <textarea id="contact-about" aria-label="Company About" rows="3" data-i18n-placeholder="configurator.about_placeholder" placeholder="Tell us about your company"></textarea>
+        <input type="text" id="contact-name" autocomplete="name" maxlength="100" aria-label="Full Name" data-i18n-placeholder="configurator.name_placeholder" placeholder="Full Name">
+        <input type="email" id="contact-email" autocomplete="email" maxlength="254" aria-label="Email Address" data-i18n-placeholder="configurator.email_placeholder" placeholder="Email Address">
+        <input type="tel" id="contact-phone" autocomplete="tel" maxlength="20" aria-label="Phone Number" data-i18n-placeholder="configurator.phone_placeholder" placeholder="Phone Number">
+        <input type="url" id="contact-gmaps" autocomplete="url" maxlength="500" aria-label="Google Maps Link" data-i18n-placeholder="configurator.gmaps_placeholder" placeholder="Google Maps Link (optional)">
+        <input type="url" id="contact-website" autocomplete="url" maxlength="500" aria-label="Website Link" data-i18n-placeholder="configurator.website_placeholder" placeholder="Website Link (optional)">
+        <textarea id="contact-about" maxlength="2000" aria-label="Company About" rows="3" data-i18n-placeholder="configurator.about_placeholder" placeholder="Tell us about your company"></textarea>
         <label for="contact-codename" class="codename-label" data-i18n="configurator.codename_label">Agent Codename</label>
-        <input type="text" id="contact-codename" aria-label="Agent Code" data-i18n-placeholder="configurator.codename_placeholder" placeholder="If No Codename Agent, write 'Aaron'">
+        <input type="text" id="contact-codename" autocomplete="off" maxlength="20" aria-label="Agent Code" data-i18n-placeholder="configurator.codename_placeholder" placeholder="If No Codename Agent, write 'Aaron'">
         <div id="form-errors" class="form-errors"></div>
       </div>
 
@@ -792,7 +792,7 @@
   <div id="toast" class="toast" role="alert" aria-live="polite"></div>
 
   <!-- ââ Scripts (order matters: i18n â app â configurator) ââââââââââââ -->
-  <script src="https://cdn.jsdelivr.net/npm/i18next@23/i18next.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/i18next@23/i18next.min.js" integrity="sha384-ZB4j+Y4rqTlON+loxr/YKq9WV8qBuZOqKukqmQVgcZ0GFy93B7TMCSezcrRkfJF5" crossorigin="anonymous" defer></script>
   <script src="js/i18n.js?v=35" defer></script>
   <script src="js/app.js?v=35" defer></script>
   <script src="js/configurator.js?v=35" defer></script>

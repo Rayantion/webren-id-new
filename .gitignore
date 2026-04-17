@@ -2,6 +2,11 @@
 .env
 .env.local
 .env.*.local
+.env.txt
+
+# n8n workflows (contain sensitive webhook paths/credential IDs)
+n8n-*.json
+*workflow*.json
 
 # OS
 .DS_Store

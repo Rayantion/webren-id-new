@@ -75,12 +75,17 @@ function renderPresets() {
     swatch.className = `preset-swatch${preset.id === activeName ? ' active' : ''}`;
     swatch.title = I18N.t(`configurator.preset_${preset.id}`);
     swatch.setAttribute('aria-label', I18N.t(`configurator.preset_${preset.id}`));
-    swatch.innerHTML = `
-      <div class="preset-swatch-inner">
-        <div class="preset-swatch-bg" style="background:${preset.bg}"></div>
-        <div class="preset-swatch-bar" style="background:${preset.primary}"></div>
-      </div>
-    `;
+    const swatchInner = document.createElement('div');
+    swatchInner.className = 'preset-swatch-inner';
+    const bgDiv = document.createElement('div');
+    bgDiv.className = 'preset-swatch-bg';
+    bgDiv.style.background = preset.bg;
+    const barDiv = document.createElement('div');
+    barDiv.className = 'preset-swatch-bar';
+    barDiv.style.background = preset.primary;
+    swatchInner.appendChild(bgDiv);
+    swatchInner.appendChild(barDiv);
+    swatch.appendChild(swatchInner);
     swatch.addEventListener('click', () => {
       applyAndSaveTheme(preset);
       document.querySelectorAll('.preset-swatch').forEach(s => s.classList.remove('active'));
@@ -345,7 +350,7 @@ function validateForm() {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) errors.push(I18N.t('configurator.error_email_invalid'));
   // Indonesian phone: must start with 08, +62, or 62 followed by 6-12 digits
   const cleanPhone = phone.replace(/[\s\-()]/g, '');
-  if (!/^(\+62|62|08)\d{6,12}$/.test(cleanPhone)) errors.push(I18N.t('configurator.error_phone'));
+  if (!/^(\+62|62|08)\d{8,12}$/.test(cleanPhone)) errors.push(I18N.t('configurator.error_phone'));
   if (codename.length < 1) errors.push(I18N.t('configurator.error_codename_required'));
 
   showFormErrors(errors);

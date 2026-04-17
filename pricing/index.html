@@ -296,6 +296,11 @@
     /* ── Reveal ── */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .reveal.revealed { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .pricing-card:hover, .btn-primary:hover, .btn-secondary:hover, .btn-white:hover, .optionb-cta:hover { transform: none; }
+      html { scroll-behavior: auto; }
+    }
 
     /* ── Feature note ── */
     .feature-note { text-align: center; margin-top: 2rem; color: var(--text-3); font-size: 0.9rem; }
@@ -737,35 +742,35 @@
     </div>
     <div class="faq-list">
       <div class="faq-item reveal">
-        <button type="button" class="faq-q" onclick="toggleFaq(this)">
+        <button type="button" class="faq-q">
           <span data-i18n="pricing.faq.q1">What's the difference between Option A and Option B?</span>
           <span class="arrow">▼</span>
         </button>
         <div class="faq-a" data-i18n="pricing.faq.a1">Option A uses pre-built templates customised with your branding, colors, and content — fast and affordable. Option B is a fully bespoke website designed from scratch to your exact vision, with complete creative freedom.</div>
       </div>
       <div class="faq-item reveal">
-        <button type="button" class="faq-q" onclick="toggleFaq(this)">
+        <button type="button" class="faq-q">
           <span data-i18n="pricing.faq.q2">Can I try before I buy?</span>
           <span class="arrow">▼</span>
         </button>
         <div class="faq-a" data-i18n="pricing.faq.a2">Yes! Use the live Demo to preview and customise your Option A website. Pick colors, fonts, and business type, then send your preferences directly to us.</div>
       </div>
       <div class="faq-item reveal">
-        <button type="button" class="faq-q" onclick="toggleFaq(this)">
+        <button type="button" class="faq-q">
           <span data-i18n="pricing.faq.q3">Is the monthly fee ongoing?</span>
           <span class="arrow">▼</span>
         </button>
         <div class="faq-a" data-i18n="pricing.faq.a3">Option A is a monthly subscription that covers hosting, maintenance, and support. Option B has a one-time setup fee plus Rp 1.500.000/year for ongoing maintenance and updates.</div>
       </div>
       <div class="faq-item reveal">
-        <button type="button" class="faq-q" onclick="toggleFaq(this)">
+        <button type="button" class="faq-q">
           <span data-i18n="pricing.faq.q4">Does the price include a domain?</span>
           <span class="arrow">▼</span>
         </button>
         <div class="faq-a" data-i18n="pricing.faq.a4">Domain registration and renewal are billed separately — domain belongs to you. We guide you through the process and help you pick the right domain.</div>
       </div>
       <div class="faq-item reveal">
-        <button type="button" class="faq-q" onclick="toggleFaq(this)">
+        <button type="button" class="faq-q">
           <span data-i18n="pricing.faq.q5">How fast can my site go live?</span>
           <span class="arrow">▼</span>
         </button>
@@ -797,7 +802,7 @@ const STRINGS = {
     "pricing.badge": "Transparent Pricing",
     "pricing.title": "Simple, Honest Pricing",
     "pricing.subtitle": "No surprises. Choose the plan that fits your business — start with a ready-made template or go fully custom.",
-    "pricing.try_demo": "Demo &amp; Make Now",
+    "pricing.try_demo": "Demo & Make Now",
     "pricing.ask_question": "Ask a Question",
     "pricing.per_month": "/month",
     "pricing.popular": "Most Popular",
@@ -811,7 +816,7 @@ const STRINGS = {
     "pricing.optiona.a1.desc": "A professional, clean website with your branding. Perfect for small businesses getting online.",
     "pricing.optiona.a2.tier": "Option A — With Email",
     "pricing.optiona.a2.name": "Professional",
-    "pricing.optiona.a2.desc": "Everything in Starter, plus professional Gmail email setup — send &amp; receive from your own domain.",
+    "pricing.optiona.a2.desc": "Everything in Starter, plus professional Gmail email setup — send & receive from your own domain.",
     "pricing.optiona.a3.tier": "Option A — Premium",
     "pricing.optiona.a3.name": "Premium",
     "pricing.optiona.a3.desc": "The full Web人 experience — live visitor analytics, priority support, and everything from Professional.",
@@ -819,10 +824,10 @@ const STRINGS = {
     "pricing.feature.ssl": "SSL certificate included",
     "pricing.feature.chat": "WhatsApp + LINE chat integration",
     "pricing.feature.responsive": "Mobile responsive design",
-    "pricing.feature.seo": "Full SEO &amp; schema markup",
+    "pricing.feature.seo": "Full SEO & schema markup",
     "pricing.feature.i18n": "English + Traditional Chinese",
-    "pricing.feature.domain": "Domain &amp; hosting guide",
-    "pricing.feature.customizer": "Color &amp; font customizer",
+    "pricing.feature.domain": "Domain & hosting guide",
+    "pricing.feature.customizer": "Color & font customizer",
     "pricing.feature.everything_starter": "Everything in Starter",
     "pricing.feature.gmail": "Gmail business email setup",
     "pricing.feature.custom_email": "Send from your domain (you@yourdomain.com)",
@@ -841,7 +846,7 @@ const STRINGS = {
     "pricing.optionb.price_note": "Setup fee + Rp 1.500.000/year maintenance",
     "pricing.optionb.cta": "Get a Custom Quote ↗",
     "pricing.optionb.f1": "Fully bespoke design — no templates",
-    "pricing.optionb.f2": "Custom animations &amp; interactions",
+    "pricing.optionb.f2": "Custom animations & interactions",
     "pricing.optionb.f3": "Unique layout tailored to your brand",
     "pricing.optionb.f4": "All Option A features included",
     "pricing.optionb.f5": "Priority WhatsApp support",
@@ -870,7 +875,7 @@ const STRINGS = {
     "pricing.cta_footer.title": "Ready to Get Started?",
     "pricing.cta_footer.subtitle": "Try the demo and send us your preferences, or chat on WhatsApp for a free consultation.",
     "pricing.whatsapp": "Chat on WhatsApp",
-    "footer.copyright": "© 2025 Web人. All rights reserved.",
+    "footer.copyright": "© 2026 Web人. All rights reserved.",
     "sneak.badge": "Coming Soon",
     "sneak.label": "Option A Upgraded",
     "sneak.title": "Digital Menu & Order System",
@@ -888,7 +893,7 @@ const STRINGS = {
     "pricing.badge": "透明定價",
     "pricing.title": "簡單、誠實的定價",
     "pricing.subtitle": "沒有隱藏費用。選擇適合您業務的方案——從現成範本開始，或選擇完全客製化。",
-    "pricing.try_demo": "試用 &amp; 立即製作",
+    "pricing.try_demo": "試用 & 立即製作",
     "pricing.ask_question": "詢問問題",
     "pricing.per_month": "/月",
     "pricing.popular": "最受歡迎",
@@ -961,7 +966,7 @@ const STRINGS = {
     "pricing.cta_footer.title": "準備好開始了嗎？",
     "pricing.cta_footer.subtitle": "試用 Demo 並傳送您的偏好，或透過 WhatsApp 免費諮詢。",
     "pricing.whatsapp": "WhatsApp 聯絡",
-    "footer.copyright": "© 2025 Web人。保留所有權利。",
+    "footer.copyright": "© 2026 Web人。保留所有權利。",
     "sneak.badge": "即將推出",
     "sneak.label": "方案 A 進化版",
     "sneak.title": "數位菜單 & 點餐系統",
@@ -972,6 +977,97 @@ const STRINGS = {
     "sneak.f4": "電子收據——自動發送 PDF 收據",
     "sneak.subtext": "現有方案 A 客戶可無縫升級",
     "sneak.cta": "2026 年推出"
+  },
+  id: {
+    "nav.home": "Beranda", "nav.services": "Layanan", "nav.pricing": "Harga",
+    "nav.demo": "Demo", "nav.contact": "Kontak",
+    "pricing.badge": "Harga Transparan",
+    "pricing.title": "Harga Sederhana & Jujur",
+    "pricing.subtitle": "Tidak ada biaya tersembunyi. Pilih paket yang cocok untuk bisnis Anda — mulai dari template siap pakai atau pilih desain custom.",
+    "pricing.try_demo": "Demo & Pesan Sekarang",
+    "pricing.ask_question": "Tanya Pertanyaan",
+    "pricing.per_month": "/bulan",
+    "pricing.popular": "Paling Populer",
+    "pricing.cta_demo": "Coba Demo",
+    "pricing.optiona.badge": "Opsi A",
+    "pricing.optiona.title": "Website Siap Pakai",
+    "pricing.optiona.subtitle": "Website berbasis template dengan branding, warna, font, dan konten Anda. Online dalam hitungan hari.",
+    "pricing.optiona.note": "Domain tidak termasuk — domain adalah milik Anda. Setup termasuk.",
+    "pricing.optiona.a1.tier": "Opsi A — Dasar",
+    "pricing.optiona.a1.name": "Pemula",
+    "pricing.optiona.a1.desc": "Website profesional dan bersih dengan branding Anda. Cocok untuk usaha kecil yang baru online.",
+    "pricing.optiona.a2.tier": "Opsi A — Dengan Email",
+    "pricing.optiona.a2.name": "Profesional",
+    "pricing.optiona.a2.desc": "Semua fitur Pemula, plus pengaturan email bisnis Gmail — kirim & terima dari domain Anda sendiri.",
+    "pricing.optiona.a3.tier": "Opsi A — Premium",
+    "pricing.optiona.a3.name": "Premium",
+    "pricing.optiona.a3.desc": "Pengalaman Web人 lengkap — analitik pengunjung real-time, dukungan prioritas, dan semua fitur Profesional.",
+    "pricing.feature.modern_design": "Desain hero animasi modern",
+    "pricing.feature.ssl": "Sertifikat SSL termasuk",
+    "pricing.feature.chat": "Integrasi WhatsApp + LINE",
+    "pricing.feature.responsive": "Desain responsif mobile",
+    "pricing.feature.seo": "SEO lengkap & schema markup",
+    "pricing.feature.i18n": "Bahasa Inggris + Bahasa Mandarin",
+    "pricing.feature.domain": "Panduan domain & hosting",
+    "pricing.feature.customizer": "Kustomisasi warna & font",
+    "pricing.feature.everything_starter": "Semua fitur Pemula",
+    "pricing.feature.gmail": "Pengaturan email bisnis Gmail",
+    "pricing.feature.custom_email": "Kirim dari domain Anda (anda@domainanda.com)",
+    "pricing.feature.form_reply": "Balasan otomatis formulir kontak",
+    "pricing.feature.sheets": "Data formulir → Google Sheets",
+    "pricing.feature.everything_pro": "Semua fitur Profesional",
+    "pricing.feature.viewcount": "Penghitung pengunjung real-time (Hari Ini / Kemarin / Bulan Lalu / Total)",
+    "pricing.feature.analytics": "Integrasi analitik situs",
+    "pricing.feature.priority": "Dukungan prioritas",
+    "pricing.optionb.badge": "Opsi B",
+    "pricing.optionb.badge_inner": "Custom Build",
+    "pricing.optionb.title": "Website Custom Penuh",
+    "pricing.optionb.subtitle": "Dibangun dari nol sesuai visi Anda. Tanpa template — murni karya profesional.",
+    "pricing.optionb.card_title": "Website Anda, Aturan Anda",
+    "pricing.optionb.desc": "Opsi B adalah website custom penuh yang dirancang dan dibangun oleh Aaron sesuai preferensi Anda — layout, interaksi, animasi, branding. Tanpa template.",
+    "pricing.optionb.price_note": "Biaya setup + Rp 1.500.000/tahun pemeliharaan",
+    "pricing.optionb.cta": "Dapatkan Penawaran Custom ↗",
+    "pricing.optionb.f1": "Desain custom penuh — tanpa template",
+    "pricing.optionb.f2": "Animasi custom & interaksi",
+    "pricing.optionb.f3": "Layout unik sesuai brand Anda",
+    "pricing.optionb.f4": "Semua fitur Opsi A termasuk",
+    "pricing.optionb.f5": "Dukungan WhatsApp prioritas",
+    "pricing.optionb.f6": "Rp 1.500.000/tahun pemeliharaan",
+    "pricing.optionb.f7": "Bantuan perpanjangan domain",
+    "pricing.optionb.f8": "Konsultasi proyek khusus",
+    "pricing.compare.title": "Bandingkan Paket",
+    "pricing.compare.feature": "Fitur",
+    "pricing.compare.ssl": "Sertifikat SSL",
+    "pricing.compare.seo": "SEO + Schema",
+    "pricing.compare.i18n": "EN + 中文 (i18n)",
+    "pricing.compare.email": "Email bisnis Gmail",
+    "pricing.compare.viewcount": "Penghitung pengunjung real-time",
+    "pricing.compare.custom": "Desain custom",
+    "pricing.faq.title": "Pertanyaan Umum",
+    "pricing.faq.q1": "Apa bedanya Opsi A dan Opsi B?",
+    "pricing.faq.a1": "Opsi A menggunakan template yang dikustomisasi dengan branding, warna, dan konten Anda — cepat dan terjangkau. Opsi B adalah website custom penuh yang dirancang dari nol sesuai visi Anda, dengan kebebasan kreatif penuh.",
+    "pricing.faq.q2": "Bisa coba sebelum beli?",
+    "pricing.faq.a2": "Bisa! Gunakan Demo untuk mempratinjau dan mengustomisasi website Opsi A. Pilih warna, font, dan tipe bisnis, lalu kirim preferensi Anda langsung ke kami.",
+    "pricing.faq.q3": "Apakah biaya bulanan berkelanjutan?",
+    "pricing.faq.a3": "Opsi A adalah langganan bulanan yang mencakup hosting, pemeliharaan, dan dukungan. Opsi B memiliki biaya setup satu kali ditambah Rp 1.500.000/tahun untuk pemeliharaan dan pembaruan.",
+    "pricing.faq.q4": "Apakah harga termasuk domain?",
+    "pricing.faq.a4": "Pendaftaran dan perpanjangan domain ditagih terpisah — domain milik Anda. Kami memandu prosesnya dan membantu memilih domain yang tepat.",
+    "pricing.faq.q5": "Seberapa cepat website bisa online?",
+    "pricing.faq.a5": "Website Opsi A biasanya online dalam 3–7 hari kerja setelah kami menerima konten Anda. Timeline Opsi B tergantung kompleksitas — biasanya 2–4 minggu.",
+    "pricing.cta_footer.title": "Siap Memulai?",
+    "pricing.cta_footer.subtitle": "Coba demo dan kirim preferensi Anda, atau chat di WhatsApp untuk konsultasi gratis.",
+    "pricing.whatsapp": "Chat di WhatsApp",
+    "footer.copyright": "© 2026 Web人. Hak cipta dilindungi.",
+    "sneak.badge": "Segera Hadir",
+    "sneak.label": "Opsi A Upgrade",
+    "sneak.title": "Sistem Menu Digital & Pemesanan",
+    "sneak.desc": "Evolusi selanjutnya dari Opsi A — restoran bisa menampilkan menu, menerima pesanan, dan mengelola dapur. Pelanggan scan QR code untuk melihat, memesan, dan membayar dari HP.",
+    "sneak.f1": "Menu QR Code — Setiap meja punya menu sendiri",
+    "sneak.f2": "Pemesanan Mudah — Pelanggan pesan dari HP",
+    "sneak.f3": "Dashboard Dapur — Pesanan muncul langsung",
+    "sneak.f4": "Struk Email — Struk PDF otomatis",
+    "sneak.subtext": "Untuk klien Opsi A — upgrade tanpa hambatan",
+    "sneak.cta": "2026"
   }
 };
 
@@ -979,12 +1075,12 @@ let currentLang = 'en';
 
 function applyStrings(lang) {
   currentLang = lang;
-  document.documentElement.lang = lang === 'zh-CN' ? 'zh-CN' : 'en';
+  document.documentElement.lang = lang === 'zh-CN' ? 'zh-CN' : lang === 'id' ? 'id' : 'en';
   document.body.classList.toggle('lang-zh', lang === 'zh-CN');
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     const val = STRINGS[lang]?.[key];
-    if (val !== undefined) el.innerHTML = val;
+    if (val !== undefined) el.textContent = val;
   });
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
@@ -1007,8 +1103,12 @@ function toggleFaq(btn) {
   if (!wasOpen) item.classList.add('open');
 }
 
+// Attach FAQ handlers via addEventListener
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => toggleFaq(btn));
+});
+
 // Scroll reveal
-function initReveal() {
   const els = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -1020,9 +1120,15 @@ function initReveal() {
 
 // Init
 const urlLang = new URLSearchParams(location.search).get('lang');
-const savedLang = localStorage.getItem('webren_lang') || (urlLang === 'zh-CN' ? 'zh-CN' : 'en');
+const savedLang = localStorage.getItem('webren_lang') || (['zh-CN','id'].includes(urlLang) ? urlLang : 'id');
 applyStrings(savedLang);
-document.addEventListener('DOMContentLoaded', initReveal);
+document.addEventListener('DOMContentLoaded', () => {
+  initReveal();
+  // Dynamic copyright year
+  document.querySelectorAll('[data-i18n="footer.copyright"]').forEach(el => {
+    el.textContent = el.textContent.replace(/202[56]/, new Date().getFullYear());
+  });
+});
 // Handle lang switch from shared outer nav
 document.addEventListener('nav:lang', function(e) { switchLang(e.detail); });
 
