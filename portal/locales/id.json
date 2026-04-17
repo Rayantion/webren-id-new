@@ -87,7 +87,28 @@
     "payment_failed": "Pembayaran gagal. Silakan coba lagi.",
     "payment_closed": "Popup pembayaran ditutup.",
     "payment_due_soon": "Pembayaran jatuh tempo dalam 7 hari!",
-    "days_left": "hari lagi"
+    "days_left": "hari lagi",
+    "my_domains": "Domain Saya",
+    "add_domain": "+ Pesan Domain",
+    "domain_name_label": "Nama Domain",
+    "domain_name_placeholder": "tokosaya",
+    "extension_label": "Ekstensi",
+    "duration_label": "Durasi",
+    "price_label": "Harga",
+    "price_per_year": "/tahun",
+    "order_domain": "Pesan Domain",
+    "domain_ordered": "Permintaan domain dikirim!",
+    "domain_failed": "Gagal memesan domain",
+    "domain_required": "Nama domain wajib diisi",
+    "no_domains": "Belum ada domain",
+    "full_domain": "Domain",
+    "registration_date": "Tanggal Daftar",
+    "expiry_date": "Tanggal Kedaluwarsa",
+    "doc_required": "Memerlukan dokumen",
+    "doc_co_id": "Domain .co.id memerlukan KTP dan NIB. Verifikasi dilakukan setelah pendaftaran.",
+    "doc_recommendation": "Kami merekomendasikan .web.id untuk klien yang belum memiliki dokumen bisnis.",
+    "no_doc_needed": "Tidak memerlukan dokumen — pendaftaran langsung!",
+    "domain_pending_notice": "Pendaftaran akan diproses setelah dokumen diverifikasi."
   },
   "agent": {
     "welcome": "Dashboard Agen",
@@ -134,7 +155,21 @@
     "email_failed": "Gagal",
     "no_clients": "Tidak ada klien",
     "no_emails": "Tidak ada email",
-    "no_invoices": "Tidak ada invoice"
+    "no_invoices": "Tidak ada invoice",
+    "all_domains": "Semua Domain",
+    "domain": "Domain",
+    "client": "Klien",
+    "status": "Status",
+    "price_paid": "Harga",
+    "duration": "Durasi"
+  },
+  "owner": {
+    "welcome": "Dashboard Pemilik",
+    "subtitle": "Pantau semua penjualan dan domain",
+    "total_revenue": "Total Pendapatan",
+    "total_domains": "Total Domain",
+    "all_payments": "Semua Pembayaran",
+    "all_domains": "Semua Domain"
   },
   "toast": {
     "status_updated": "Status diperbarui",

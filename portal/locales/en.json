@@ -87,7 +87,28 @@
     "payment_failed": "Payment failed. Please try again.",
     "payment_closed": "Payment popup closed.",
     "payment_due_soon": "Payment due within 7 days!",
-    "days_left": "days left"
+    "days_left": "days left",
+    "my_domains": "My Domains",
+    "add_domain": "+ Order Domain",
+    "domain_name_label": "Domain Name",
+    "domain_name_placeholder": "mystore",
+    "extension_label": "Extension",
+    "duration_label": "Duration",
+    "price_label": "Price",
+    "price_per_year": "/year",
+    "order_domain": "Order Domain",
+    "domain_ordered": "Domain order submitted!",
+    "domain_failed": "Failed to order domain",
+    "domain_required": "Domain name is required",
+    "no_domains": "No domains yet",
+    "full_domain": "Domain",
+    "registration_date": "Registered",
+    "expiry_date": "Expires",
+    "doc_required": "Documents required",
+    "doc_co_id": "Domain .co.id requires KTP (ID card) and NIB (business license). Verification happens after registration.",
+    "doc_recommendation": "We recommend .web.id for clients who don't have business documents yet.",
+    "no_doc_needed": "No documents needed — instant registration!",
+    "domain_pending_notice": "Registration will be processed after documents are verified."
   },
   "agent": {
     "welcome": "Agent Dashboard",
@@ -134,7 +155,21 @@
     "email_failed": "Failed",
     "no_clients": "No clients",
     "no_emails": "No emails",
-    "no_invoices": "No invoices"
+    "no_invoices": "No invoices",
+    "all_domains": "All Domains",
+    "domain": "Domain",
+    "client": "Client",
+    "status": "Status",
+    "price_paid": "Price",
+    "duration": "Duration"
+  },
+  "owner": {
+    "welcome": "Owner Dashboard",
+    "subtitle": "Monitor all sales and domains",
+    "total_revenue": "Total Revenue",
+    "total_domains": "Total Domains",
+    "all_payments": "All Payments",
+    "all_domains": "All Domains"
   },
   "toast": {
     "status_updated": "Status updated",

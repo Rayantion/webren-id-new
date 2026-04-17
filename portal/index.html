@@ -164,6 +164,7 @@
       <div class="stat-card"><span class="stat-value" id="stat-websites">0</span><span class="stat-label" data-i18n="client.websites">Website</span></div>
       <div class="stat-card"><span class="stat-value" id="stat-due">—</span><span class="stat-label" data-i18n="client.next_due">Jatuh Tempo</span></div>
       <div class="stat-card"><span class="stat-value" id="stat-total-paid">Rp 0</span><span class="stat-label" data-i18n="client.total_paid">Total Dibayar</span></div>
+      <div class="stat-card"><span class="stat-value" id="stat-domains">0</span><span class="stat-label" data-i18n="client.my_domains">Domain Saya</span></div>
     </div>
     <div class="section-header">
       <h2 data-i18n="client.my_websites">Website Saya</h2>
@@ -195,6 +196,24 @@
           <th data-i18n="client.actions">Aksi</th>
         </tr></thead>
         <tbody id="payments-tbody"><tr><td colspan="6" class="empty-row">Memuat...</td></tr></tbody>
+      </table>
+    </div>
+
+    <!-- Domains Section -->
+    <div class="section-header" style="margin-top:2rem">
+      <h2 data-i18n="client.my_domains">Domain Saya</h2>
+      <button type="button" id="btn-add-domain" class="btn-primary btn-sm" data-i18n="client.add_domain">+ Pesan Domain</button>
+    </div>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead><tr>
+          <th data-i18n="client.full_domain">Domain</th>
+          <th data-i18n="client.amount">Jumlah</th>
+          <th data-i18n="client.duration_label">Durasi</th>
+          <th data-i18n="client.status">Status</th>
+          <th data-i18n="client.expiry_date">Kedaluwarsa</th>
+        </tr></thead>
+        <tbody id="domains-tbody"><tr><td colspan="5" class="empty-row">Memuat...</td></tr></tbody>
       </table>
     </div>
   </div>
@@ -229,6 +248,49 @@
         </div>
         <div id="add-website-error" class="form-error hidden"></div>
         <button type="submit" class="btn-primary" id="btn-submit-website" data-i18n="client.submit_website">Kirim Permintaan</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Domain Modal -->
+  <div id="add-domain-overlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 data-i18n="client.order_domain">Pesan Domain</h3>
+        <button type="button" id="btn-close-domain-modal" class="modal-close">&times;</button>
+      </div>
+      <form id="form-add-domain">
+        <div class="form-group">
+          <label for="domain-name-input" data-i18n="client.domain_name_label">Nama Domain</label>
+          <input type="text" id="domain-name-input" required data-i18n-placeholder="client.domain_name_placeholder" placeholder="tokosaya" pattern="[a-z0-9][a-z0-9-]*[a-z0-9]" title="Hanya huruf kecil, angka, dan tanda hubung">
+        </div>
+        <div class="form-group">
+          <label for="domain-extension" data-i18n="client.extension_label">Ekstensi</label>
+          <select id="domain-extension" required>
+            <option value=".com">.com — Rp 110.000/tahun</option>
+            <option value=".net">.net — Rp 92.480/tahun</option>
+            <option value=".xyz">.xyz — Rp 159.670/tahun</option>
+            <option value=".id">.id — Rp 38.000/tahun</option>
+            <option value=".co.id">.co.id — Rp 7.620/tahun (butuh KTP+NIB)</option>
+            <option value=".web.id">.web.id — Rp 55.920/tahun (tanpa dokumen)</option>
+            <option value=".my.id">.my.id — Rp 3.810/tahun (tanpa dokumen)</option>
+            <option value=".icu">.icu — Rp 47.960/tahun</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="domain-duration" data-i18n="client.duration_label">Durasi</label>
+          <select id="domain-duration" required>
+            <option value="1">1 tahun</option>
+            <option value="2">2 tahun</option>
+            <option value="5">5 tahun</option>
+          </select>
+        </div>
+        <div class="domain-price-display">
+          <strong data-i18n="client.price_label">Harga</strong>: <span id="domain-price-display">—</span>
+        </div>
+        <div id="domain-doc-notice" class="domain-doc-notice hidden"></div>
+        <div id="add-domain-error" class="form-error hidden"></div>
+        <button type="submit" class="btn-primary" id="btn-submit-domain" data-i18n="client.order_domain">Pesan Domain</button>
       </form>
     </div>
   </div>
@@ -326,6 +388,49 @@
           <th data-i18n="admin.actions">Aksi</th>
         </tr></thead>
         <tbody id="admin-emails-tbody"><tr><td colspan="4" class="empty-row">Memuat...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Owner Dashboard -->
+  <div id="owner-dashboard" class="dashboard-content hidden">
+    <div class="dash-hero">
+      <h1 data-i18n="owner.welcome">Dashboard Pemilik</h1>
+      <p class="dash-subtitle" data-i18n="owner.subtitle">Pantau semua penjualan dan domain</p>
+    </div>
+    <div class="dash-stats">
+      <div class="stat-card"><span class="stat-value" id="stat-owner-clients">0</span><span class="stat-label" data-i18n="admin.total_clients">Total Klien</span></div>
+      <div class="stat-card"><span class="stat-value" id="stat-owner-domains">0</span><span class="stat-label" data-i18n="owner.total_domains">Total Domain</span></div>
+      <div class="stat-card"><span class="stat-value" id="stat-owner-revenue">Rp 0</span><span class="stat-label" data-i18n="owner.total_revenue">Total Pendapatan</span></div>
+    </div>
+    <div class="section-header">
+      <h2 data-i18n="owner.all_payments">Semua Pembayaran</h2>
+    </div>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead><tr>
+          <th data-i18n="admin.client_name">Klien</th>
+          <th data-i18n="client.amount">Jumlah</th>
+          <th data-i18n="client.cycle">Siklus</th>
+          <th data-i18n="client.status">Status</th>
+          <th data-i18n="client.date">Tanggal</th>
+        </tr></thead>
+        <tbody id="owner-payments-tbody"><tr><td colspan="5" class="empty-row">Memuat...</td></tr></tbody>
+      </table>
+    </div>
+    <div class="section-header" style="margin-top:2rem">
+      <h2 data-i18n="owner.all_domains">Semua Domain</h2>
+    </div>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead><tr>
+          <th data-i18n="client.full_domain">Domain</th>
+          <th data-i18n="admin.client_name">Klien</th>
+          <th data-i18n="admin.price_paid">Harga</th>
+          <th data-i18n="client.status">Status</th>
+          <th data-i18n="client.expiry_date">Kedaluwarsa</th>
+        </tr></thead>
+        <tbody id="owner-domains-tbody"><tr><td colspan="5" class="empty-row">Memuat...</td></tr></tbody>
       </table>
     </div>
   </div>

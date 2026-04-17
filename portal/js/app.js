@@ -6,8 +6,27 @@ const COMMISSION = 0.15;
 const MIDTRANS_CLIENT_KEY = 'SB-Mid-client-6vBqP7mKfnRn2nLp';
 const SNAP_TOKEN_URL = 'https://n8n.rayantion.me/webhook/create-snap-token';
 
+// Domain extension pricing (IDR/year) based on IDWebhost reseller prices
+const DOMAIN_PRICES = {
+  '.com': 110000,
+  '.net': 92480,
+  '.xyz': 159670,
+  '.id': 38000,
+  '.co.id': 7620,
+  '.web.id': 55920,
+  '.or.id': 3810,
+  '.ac.id': 3810,
+  '.my.id': 3810,
+  '.icu': 47960,
+};
+
+// Extensions that require documents after registration
+const DOMAIN_DOC_REQUIRED = ['.co.id', '.net.id', '.or.id', '.ac.id'];
+// Extensions that need NO documents (instant registration)
+const DOMAIN_NO_DOC = ['.web.id', '.id', '.my.id', '.biz.id', '.com', '.net', '.xyz', '.icu'];
+
 let currentUser = null;
-let userRole = 'client'; // 'client' | 'agent' | 'admin'
+let userRole = 'client'; // 'client' | 'agent' | 'admin' | 'owner'
 let userLang = 'id';
 let logoutTimeout = null;
 
@@ -158,6 +177,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('btn-close-website-modal')?.addEventListener('click', closeAddWebsiteModal);
   document.getElementById('add-website-overlay')?.addEventListener('click', e => { if (e.target === e.currentTarget) closeAddWebsiteModal(); });
   document.getElementById('form-add-website')?.addEventListener('submit', handleAddWebsite);
+
+  // Client dashboard: add domain modal
+  document.getElementById('btn-add-domain')?.addEventListener('click', openAddDomainModal);
+  document.getElementById('btn-close-domain-modal')?.addEventListener('click', closeAddDomainModal);
+  document.getElementById('add-domain-overlay')?.addEventListener('click', e => { if (e.target === e.currentTarget) closeAddDomainModal(); });
+  document.getElementById('form-add-domain')?.addEventListener('submit', handleAddDomain);
+  document.getElementById('domain-extension')?.addEventListener('change', updateDomainPrice);
+  document.getElementById('domain-duration')?.addEventListener('change', updateDomainPrice);
+
   document.getElementById('btn-warning-pay')?.addEventListener('click', () => {
     document.querySelector('#payments-tbody')?.scrollIntoView({ behavior: 'smooth' });
   });
@@ -196,9 +224,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function resolveRole() {
   try {
     // Check if user is in agents table
-    const { data: agentData } = await sb.from('agents').select('is_admin, full_name, country, lang, commission_balance, referral_code').eq('id', currentUser.id).single();
+    const { data: agentData } = await sb.from('agents').select('is_admin, role, full_name, country, lang, commission_balance, referral_code').eq('id', currentUser.id).single();
     if (agentData) {
-      userRole = agentData.is_admin ? 'admin' : 'agent';
+      // Determine role: owner > admin > agent
+      if (agentData.role === 'owner') {
+        userRole = 'owner';
+      } else if (agentData.is_admin || agentData.role === 'admin') {
+        userRole = 'admin';
+      } else {
+        userRole = 'agent';
+      }
       if (agentData.lang) userLang = agentData.lang;
       document.getElementById('header-user-name').textContent = agentData.full_name || currentUser.email;
 
@@ -335,6 +370,8 @@ function showRoleDashboard() {
   document.getElementById('client-dashboard').classList.toggle('hidden', userRole !== 'client');
   document.getElementById('agent-dashboard').classList.toggle('hidden', userRole !== 'agent');
   document.getElementById('admin-dashboard').classList.toggle('hidden', userRole !== 'admin');
+  const ownerDash = document.getElementById('owner-dashboard');
+  if (ownerDash) ownerDash.classList.toggle('hidden', userRole !== 'owner');
 }
 
 function switchAuthTab(tab) {
@@ -356,6 +393,7 @@ async function loadDashboard() {
   if (userRole === 'client') await loadClientDashboard();
   else if (userRole === 'agent') await loadAgentDashboard();
   else if (userRole === 'admin') await loadAdminDashboard();
+  else if (userRole === 'owner') await loadOwnerDashboard();
 }
 async function reloadDashboard() { await loadDashboard(); }
 
@@ -377,7 +415,7 @@ function tdBadge(text, statusClass) {
 
 // --- Client Dashboard ---
 async function loadClientDashboard() {
-  await Promise.all([loadClientWebsites(), loadClientPayments()]);
+  await Promise.all([loadClientWebsites(), loadClientPayments(), loadClientDomains()]);
   checkPaymentDueSoon();
 }
 
@@ -1044,6 +1082,262 @@ async function removeAllowedEmail(email) {
     showToast(I18N.t('admin.email_removed') || 'Email dihapus');
     loadAdminEmails();
   } catch { showToast(I18N.t('admin.email_failed') || 'Gagal menghapus'); }
+}
+
+// --- Owner Dashboard ---
+async function loadOwnerDashboard() {
+  await Promise.all([loadOwnerStats(), loadOwnerPayments(), loadOwnerDomains()]);
+}
+
+async function loadOwnerStats() {
+  try {
+    const { count: clientCount } = await sb.from('clients').select('*', { count: 'exact', head: true });
+    const { count: domainCount } = await sb.from('domains').select('*', { count: 'exact', head: true });
+    const { data: payments } = await sb.from('payments').select('amount').eq('status', 'paid');
+    const revenue = (payments || []).reduce((s, p) => s + Number(p.amount), 0);
+    document.getElementById('stat-owner-clients').textContent = clientCount || 0;
+    document.getElementById('stat-owner-domains').textContent = domainCount || 0;
+    document.getElementById('stat-owner-revenue').textContent = fmtRp(revenue);
+  } catch {}
+}
+
+async function loadOwnerPayments() {
+  const tbody = document.getElementById('owner-payments-tbody');
+  tbody.textContent = '';
+  const loadingRow = document.createElement('tr');
+  const loadingCell = document.createElement('td');
+  loadingCell.colSpan = 5; loadingCell.className = 'empty-row';
+  loadingCell.textContent = I18N.t('loading');
+  loadingRow.appendChild(loadingCell);
+  tbody.appendChild(loadingRow);
+
+  try {
+    const { data, error } = await sb.from('payments').select('*, clients(client_name)').order('created_at', { ascending: false }).limit(50);
+    if (error) throw error;
+    renderOwnerPayments(data || []);
+  } catch (err) {
+    tbody.textContent = '';
+    const errRow = document.createElement('tr');
+    const errCell = document.createElement('td');
+    errCell.colSpan = 5; errCell.className = 'empty-row';
+    errCell.textContent = 'Error: ' + err.message;
+    errRow.appendChild(errCell);
+    tbody.appendChild(errRow);
+  }
+}
+
+function renderOwnerPayments(payments) {
+  const tbody = document.getElementById('owner-payments-tbody');
+  tbody.textContent = '';
+  if (!payments.length) {
+    const row = document.createElement('tr');
+    const cell = document.createElement('td');
+    cell.colSpan = 5; cell.className = 'empty-row';
+    cell.textContent = I18N.t('client.no_payments') || 'Belum ada pembayaran';
+    row.appendChild(cell);
+    tbody.appendChild(row);
+    return;
+  }
+  const statusLabels = { pending: I18N.t('status.pending') || 'Tertunda', paid: I18N.t('status.paid') || 'Dibayar', failed: I18N.t('status.failed') || 'Gagal', expired: I18N.t('status.expired') || 'Kedaluwarsa', refunded: I18N.t('status.refunded') || 'Dikembalikan' };
+  payments.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.appendChild(td((p.clients && p.clients.client_name) || '—'));
+    tr.appendChild(td(fmtRp(p.amount)));
+    tr.appendChild(td(p.billing_cycle_months + ' bulan'));
+    tr.appendChild(tdBadge(statusLabels[p.status] || p.status, p.status));
+    tr.appendChild(td(new Date(p.created_at).toLocaleDateString('id-ID')));
+    tbody.appendChild(tr);
+  });
+}
+
+async function loadOwnerDomains() {
+  const tbody = document.getElementById('owner-domains-tbody');
+  tbody.textContent = '';
+  const loadingRow = document.createElement('tr');
+  const loadingCell = document.createElement('td');
+  loadingCell.colSpan = 5; loadingCell.className = 'empty-row';
+  loadingCell.textContent = I18N.t('loading');
+  loadingRow.appendChild(loadingCell);
+  tbody.appendChild(loadingRow);
+
+  try {
+    const { data, error } = await sb.from('domains').select('*, clients(client_name)').order('created_at', { ascending: false });
+    if (error) throw error;
+    renderOwnerDomains(data || []);
+  } catch (err) {
+    tbody.textContent = '';
+    const errRow = document.createElement('tr');
+    const errCell = document.createElement('td');
+    errCell.colSpan = 5; errCell.className = 'empty-row';
+    errCell.textContent = 'Error: ' + err.message;
+    errRow.appendChild(errCell);
+    tbody.appendChild(errRow);
+  }
+}
+
+function renderOwnerDomains(domains) {
+  const tbody = document.getElementById('owner-domains-tbody');
+  tbody.textContent = '';
+  if (!domains.length) {
+    const row = document.createElement('tr');
+    const cell = document.createElement('td');
+    cell.colSpan = 5; cell.className = 'empty-row';
+    cell.textContent = I18N.t('admin.no_emails') || 'Tidak ada domain';
+    row.appendChild(cell);
+    tbody.appendChild(row);
+    return;
+  }
+  const statusLabels = { pending: I18N.t('status.pending') || 'Tertunda', active: I18N.t('status.active') || 'Aktif', cancelled: I18N.t('status.cancelled') || 'Dibatalkan', expired: I18N.t('status.expired') || 'Kedaluwarsa' };
+  domains.forEach(d => {
+    const tr = document.createElement('tr');
+    tr.appendChild(td(d.domain_name + d.extension));
+    tr.appendChild(td((d.clients && d.clients.client_name) || '—'));
+    tr.appendChild(td(fmtRp(d.price_paid)));
+    tr.appendChild(tdBadge(statusLabels[d.status] || d.status, d.status));
+    tr.appendChild(td(d.expiry_date ? new Date(d.expiry_date).toLocaleDateString('id-ID') : '—'));
+    tbody.appendChild(tr);
+  });
+}
+
+// --- Domain Functions ---
+function openAddDomainModal() {
+  document.getElementById('add-domain-overlay').classList.remove('hidden');
+  document.getElementById('domain-name-input').focus();
+}
+
+function closeAddDomainModal() {
+  document.getElementById('add-domain-overlay').classList.add('hidden');
+  document.getElementById('form-add-domain').reset();
+  document.getElementById('domain-price-display').textContent = '—';
+  document.getElementById('domain-doc-notice').classList.add('hidden');
+  showMsg('add-domain-error', '');
+}
+
+function updateDomainPrice() {
+  const ext = document.getElementById('domain-extension').value;
+  const duration = parseInt(document.getElementById('domain-duration').value) || 1;
+  const priceEl = document.getElementById('domain-price-display');
+  const noticeEl = document.getElementById('domain-doc-notice');
+
+  if (DOMAIN_PRICES[ext]) {
+    const total = DOMAIN_PRICES[ext] * duration;
+    priceEl.textContent = fmtRp(total) + (duration > 1 ? ` (${duration} ${I18N.t('client.years') || 'tahun'})` : I18N.t('client.price_per_year') || '/tahun');
+  } else {
+    priceEl.textContent = '—';
+  }
+
+  // Show document requirement notice
+  if (DOMAIN_DOC_REQUIRED.includes(ext)) {
+    noticeEl.classList.remove('hidden');
+    const isCoId = ext === '.co.id';
+    noticeEl.textContent = isCoId
+      ? (I18N.t('client.doc_co_id') || 'Domain .co.id memerlukan KTP dan NIB. Verifikasi dilakukan setelah pendaftaran.')
+      : (I18N.t('client.domain_pending_notice') || 'Pendaftaran akan diproses setelah dokumen diverifikasi.');
+  } else if (DOMAIN_NO_DOC.includes(ext)) {
+    noticeEl.classList.remove('hidden');
+    noticeEl.textContent = I18N.t('client.no_doc_needed') || 'Tidak memerlukan dokumen — pendaftaran langsung!';
+    // Recommend .web.id for clients without business docs
+    if (ext === '.web.id') {
+      noticeEl.textContent = I18N.t('client.no_doc_needed') || 'Tidak memerlukan dokumen — pendaftaran langsung!';
+    }
+  } else {
+    noticeEl.classList.add('hidden');
+  }
+}
+
+async function handleAddDomain(e) {
+  e.preventDefault();
+  const btn = document.getElementById('btn-submit-domain');
+  btn.disabled = true;
+  showMsg('add-domain-error', '');
+
+  const domainName = document.getElementById('domain-name-input').value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
+  const extension = document.getElementById('domain-extension').value;
+  const duration = parseInt(document.getElementById('domain-duration').value) || 1;
+
+  if (!domainName) {
+    showMsg('add-domain-error', I18N.t('client.domain_required') || 'Nama domain wajib diisi');
+    btn.disabled = false;
+    return;
+  }
+
+  const pricePaid = (DOMAIN_PRICES[extension] || 0) * duration;
+  const needsDocs = DOMAIN_DOC_REQUIRED.includes(extension);
+
+  try {
+    const { error } = await sb.from('domains').insert({
+      client_id: currentUser.id,
+      domain_name: domainName,
+      extension: extension,
+      duration_years: duration,
+      price_paid: pricePaid,
+      status: needsDocs ? 'pending' : 'active',
+    });
+    if (error) throw error;
+    closeAddDomainModal();
+    showToast(I18N.t('client.domain_ordered') || 'Permintaan domain dikirim!');
+    loadClientDashboard();
+  } catch (err) {
+    showMsg('add-domain-error', I18N.t('client.domain_failed') || 'Gagal memesan domain: ' + err.message);
+  }
+  btn.disabled = false;
+}
+
+async function loadClientDomains() {
+  const tbody = document.getElementById('domains-tbody');
+  tbody.textContent = '';
+  const loadingRow = document.createElement('tr');
+  const loadingCell = document.createElement('td');
+  loadingCell.colSpan = 5; loadingCell.className = 'empty-row';
+  loadingCell.textContent = I18N.t('loading');
+  loadingRow.appendChild(loadingCell);
+  tbody.appendChild(loadingRow);
+
+  try {
+    const { data, error } = await sb.from('domains').select('*').eq('client_id', currentUser.id).order('created_at', { ascending: false });
+    if (error) throw error;
+    renderClientDomains(data || []);
+  } catch (err) {
+    tbody.textContent = '';
+    const errRow = document.createElement('tr');
+    const errCell = document.createElement('td');
+    errCell.colSpan = 5; errCell.className = 'empty-row';
+    errCell.textContent = 'Error: ' + err.message;
+    errRow.appendChild(errCell);
+    tbody.appendChild(errRow);
+  }
+}
+
+function renderClientDomains(domains) {
+  const tbody = document.getElementById('domains-tbody');
+  tbody.textContent = '';
+  const statDomains = document.getElementById('stat-domains');
+  if (statDomains) statDomains.textContent = domains.length;
+
+  if (!domains.length) {
+    const row = document.createElement('tr');
+    const cell = document.createElement('td');
+    cell.colSpan = 5; cell.className = 'empty-row';
+    cell.textContent = I18N.t('client.no_domains') || 'Belum ada domain';
+    row.appendChild(cell);
+    tbody.appendChild(row);
+    return;
+  }
+
+  const statusLabels = { pending: I18N.t('status.pending') || 'Tertunda', active: I18N.t('status.active') || 'Aktif', cancelled: I18N.t('status.cancelled') || 'Dibatalkan', expired: I18N.t('status.expired') || 'Kedaluwarsa' };
+
+  domains.forEach(d => {
+    const tr = document.createElement('tr');
+    const fullDomain = d.domain_name + d.extension;
+    tr.appendChild(td(fullDomain));
+    tr.appendChild(td(fmtRp(d.price_paid)));
+    tr.appendChild(td(d.duration_years + ' ' + (d.duration_years > 1 ? (I18N.t('client.years') || 'tahun') : (I18N.t('client.year') || 'tahun'))));
+    tr.appendChild(tdBadge(statusLabels[d.status] || d.status, d.status));
+    const dateCell = document.createElement('td');
+    dateCell.textContent = d.expiry_date ? new Date(d.expiry_date).toLocaleDateString('id-ID') : '—';
+    tr.appendChild(dateCell);
+    tbody.appendChild(tr);
+  });
 }
 
 /* === Helpers === */
