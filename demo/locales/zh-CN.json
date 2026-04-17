@@ -236,7 +236,7 @@
     "about_placeholder": "介绍一下您的公司",
     "codename_label": "代理商代号",
     "codename_placeholder": "若无代理商代号，请填写 'Aaron'",
-    "send": "发送给 Web人",
+    "send": "立即订购",
     "sending": "发送中...",
     "success": "已发送！您的代理商将尽快与您联系。",
     "error": "出现问题，请重试。",
@@ -264,7 +264,7 @@
     "preset_marigold": "万寿菊",
     "error_name": "姓名至少2个字符。",
     "error_email_invalid": "请输入有效的电子邮箱地址。",
-    "error_phone": "电话号码至少需要8位数字。",
+    "error_phone": "请输入有效的印尼电话号码（08xx、+62 或 62）。",
     "error_codename_required": "代理商代码为必填项。"
   }
 }

@@ -236,7 +236,7 @@
     "about_placeholder": "Ceritakan tentang perusahaan Anda",
     "codename_label": "Kode Agen",
     "codename_placeholder": "Jika tidak punya kode agen, tulis 'Aaron'",
-    "send": "Kirim ke Web人",
+    "send": "Pesan Sekarang",
     "sending": "Mengirim...",
     "success": "Terkirim! Agen Anda akan segera menghubungi.",
     "error": "Terjadi kesalahan. Silakan coba lagi.",
@@ -264,7 +264,7 @@
     "preset_marigold": "Marigold",
     "error_name": "Nama minimal 2 karakter.",
     "error_email_invalid": "Masukkan alamat email yang valid.",
-    "error_phone": "Nomor telepon harus mengandung minimal 8 digit.",
+    "error_phone": "Masukkan nomor telepon Indonesia yang valid (08xx, +62, atau 62).",
     "error_codename_required": "Kode agen wajib diisi."
   }
 }

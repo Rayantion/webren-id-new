@@ -236,7 +236,7 @@
     "about_placeholder": "Tell us about your company",
     "codename_label": "Agent Codename",
     "codename_placeholder": "If No Codename Agent, write 'Aaron'",
-    "send": "Send to Web人",
+    "send": "Order Now",
     "sending": "Sending...",
     "success": "Sent! Your agent will be in touch soon.",
     "error": "Something went wrong. Please try again.",
@@ -264,7 +264,7 @@
     "preset_marigold": "Marigold",
     "error_name": "Name must be at least 2 characters.",
     "error_email_invalid": "Please enter a valid email address.",
-    "error_phone": "Phone must contain at least 8 digits.",
+    "error_phone": "Enter a valid Indonesian phone number (08xx, +62, or 62).",
     "error_codename_required": "Agent code is required."
   }
 }

@@ -342,9 +342,10 @@ function validateForm() {
   const errors = [];
 
   if (name.length < 2) errors.push(I18N.t('configurator.error_name'));
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push(I18N.t('configurator.error_email_invalid'));
-  const digits = phone.replace(/[^0-9]/g, '');
-  if (digits.length < 8) errors.push(I18N.t('configurator.error_phone'));
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) errors.push(I18N.t('configurator.error_email_invalid'));
+  // Indonesian phone: must start with 08, +62, or 62 followed by 6-12 digits
+  const cleanPhone = phone.replace(/[\s\-()]/g, '');
+  if (!/^(\+62|62|08)\d{6,12}$/.test(cleanPhone)) errors.push(I18N.t('configurator.error_phone'));
   if (codename.length < 1) errors.push(I18N.t('configurator.error_codename_required'));
 
   showFormErrors(errors);
@@ -384,7 +385,7 @@ function initSendButton() {
     const gmaps    = document.getElementById('contact-gmaps').value.trim();
     const website  = document.getElementById('contact-website').value.trim();
     const about    = document.getElementById('contact-about').value.trim();
-    const codename = document.getElementById('contact-codename').value.trim() || 'Aaron';
+    const codename = document.getElementById('contact-codename').value.trim().toUpperCase() || 'AARON';
     const config   = AppState.get();
 
     btn.disabled = true;
@@ -478,4 +479,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initBgSelector();
   initModeButtons();
   initSendButton();
+
+  // Auto-uppercase codename as user types
+  const codenameInput = document.getElementById('contact-codename');
+  if (codenameInput) {
+    codenameInput.addEventListener('input', () => {
+      const pos = codenameInput.selectionStart;
+      codenameInput.value = codenameInput.value.toUpperCase();
+      codenameInput.setSelectionRange(pos, pos);
+    });
+  }
 });

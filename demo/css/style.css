@@ -1129,13 +1129,18 @@ input[type="color"] {
 /* Inputs in drawer */
 .drawer-section input[type="text"],
 .drawer-section input[type="email"],
-.drawer-section input[type="tel"] {
+.drawer-section input[type="tel"],
+.drawer-section input[type="url"],
+.drawer-section textarea {
   background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
   color: #F9FAFB; border-radius: 8px; padding: 0.7rem 0.85rem;
   font-size: 0.9rem; width: 100%; min-height: 46px; transition: border-color 0.2s;
+  font-family: var(--font-body); resize: vertical;
 }
-.drawer-section input:focus { outline: none; border-color: var(--color-primary); background: rgba(255,255,255,0.07); }
-.drawer-section input::placeholder { color: rgba(249,250,251,0.3); }
+.drawer-section input:focus,
+.drawer-section textarea:focus { outline: none; border-color: var(--color-primary); background: rgba(255,255,255,0.07); }
+.drawer-section input::placeholder,
+.drawer-section textarea::placeholder { color: rgba(249,250,251,0.3); }
 .form-errors { font-size: 0.82rem; color: #f87171; display: flex; flex-direction: column; gap: 0.25rem; padding: 0.1rem 0; }
 .codename-label { display: block; margin-top: 16px; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem; color: #555; }
 
