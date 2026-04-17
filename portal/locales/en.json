@@ -81,6 +81,8 @@
     "website_requested": "Website request submitted!",
     "website_failed": "Failed to add website",
     "pay_now": "Pay Now",
+    "subscription": "Subscription",
+    "one_time": "One-time",
     "confirm_pay": "Confirm manual payment? Admin will verify.",
     "payment_recorded": "Payment recorded! Verifying...",
     "payment_pending": "Payment pending. Complete your payment.",

@@ -1,0 +1,131 @@
+{
+  "name": "Midtrans Snap Token Proxy",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "create-snap-token",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "snap-webhook-trigger",
+      "name": "Snap Token Request",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "create-snap-token"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body;\n\nconst paymentId = body.payment_id;\nconst amount = body.amount;\nconst clientName = body.client_name || 'Customer';\nconst clientEmail = body.client_email || '';\nconst websiteId = body.website_id || '';\nconst isSubscription = body.is_subscription || false;\n\nif (!paymentId || !amount) {\n  throw new Error('payment_id and amount are required');\n}\n\nconst orderId = 'PAY-' + paymentId + '-' + Date.now();\n\nconst payload = {\n  transaction_details: {\n    order_id: orderId,\n    gross_amount: Number(amount)\n  },\n  customer_details: {\n    first_name: clientName,\n    email: clientEmail\n  },\n  item_details: [\n    {\n      id: websiteId || 'webren-service',\n      price: Number(amount),\n      quantity: 1,\n      name: 'Webren ID Website Service'\n    }\n  ]\n};\n\nif (isSubscription) {\n  payload.credit_card = { save_card: true };\n  payload.recurring = { required: true, interval_unit: 'month' };\n  payload.user_id = 'webren-client-' + paymentId;\n}\n\nreturn {\n  json: {\n    orderId: orderId,\n    paymentId: paymentId,\n    payloadStr: JSON.stringify(payload)\n  }\n};"
+      },
+      "id": "build-payload",
+      "name": "Build Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://app.sandbox.midtrans.com/snap/v1/transactions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.payloadStr }}",
+        "options": {}
+      },
+      "id": "call-midtrans",
+      "name": "Call Midtrans API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 0],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "n3FWfmN7MbMiDjfL",
+          "name": "Midtrans Sandbox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const midtransResponse = $input.first().json;\nconst orderId = $('Build Payload').item.json.orderId;\nconst paymentId = $('Build Payload').item.json.paymentId;\n\nconst snapToken = midtransResponse.token;\n\nif (!snapToken) {\n  throw new Error('Midtrans did not return a snap token: ' + JSON.stringify(midtransResponse));\n}\n\nreturn {\n  json: {\n    snap_token: snapToken,\n    order_id: orderId,\n    payment_id: paymentId\n  }\n};"
+      },
+      "id": "extract-token",
+      "name": "Extract Token",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 0]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ snap_token: $json.snap_token, order_id: $json.order_id, payment_id: $json.payment_id }) }}"
+      },
+      "id": "respond-token",
+      "name": "Respond with Token",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [880, 0]
+    }
+  ],
+  "connections": {
+    "Snap Token Request": {
+      "main": [
+        [
+          {
+            "node": "Build Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Payload": {
+      "main": [
+        [
+          {
+            "node": "Call Midtrans API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Midtrans API": {
+      "main": [
+        [
+          {
+            "node": "Extract Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Token": {
+      "main": [
+        [
+          {
+            "node": "Respond with Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

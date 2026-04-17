@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-  <!-- Midtrans Snap SDK (sandbox) — change to app.midtrans.com for production -->
-  <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-6vBqP7mKfnRn2nLp"></script>
+  <!-- Midtrans Snap SDK — loaded dynamically based on MIDTRANS_ENV config in app.js -->
+  <script id="midtrans-sdk-loader"></script>
 </head>
 <body>
 

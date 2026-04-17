@@ -1,0 +1,190 @@
+{
+  "name": "Midtrans Payment Webhook",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "midtrans-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Midtrans Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "midtrans-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body;\n\nconst orderId = body.order_id || '';\nconst statusCode = body.status_code || '';\nconst grossAmount = body.gross_amount || '';\nconst transactionStatus = body.transaction_status || '';\nconst paymentType = body.payment_type || '';\nconst fraudStatus = body.fraud_status || '';\nconst transactionId = body.transaction_id || '';\nconst transactionTime = body.transaction_time || '';\nconst signatureKey = body.signature_key || '';\nconst subscriptionId = body.subscription_id || null;\nconst savedTokenId = body.saved_token_id || null;\n\nconst serverKey = $env.MIDTRANS_SERVER_KEY;\nconst crypto = require('crypto');\nconst expectedSignature = crypto.createHash('sha512')\n  .update(orderId + statusCode + grossAmount + serverKey)\n  .digest('hex');\n\nconst isValid = signatureKey === expectedSignature;\n\nlet newStatus = 'pending';\nif (transactionStatus === 'capture' || transactionStatus === 'settlement') {\n  if (fraudStatus === 'accept' || fraudStatus === '') {\n    newStatus = 'paid';\n  }\n} else if (transactionStatus === 'cancel' || transactionStatus === 'deny') {\n  newStatus = 'failed';\n} else if (transactionStatus === 'expire') {\n  newStatus = 'expired';\n} else if (transactionStatus === 'pending') {\n  newStatus = 'pending';\n} else if (transactionStatus === 'refund') {\n  newStatus = 'refunded';\n}\n\nconst now = new Date();\nconst nextDueDate = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());\nconst nextDueDateStr = nextDueDate.toISOString().split('T')[0];\n\nreturn {\n  json: {\n    isValid,\n    orderId,\n    transactionId,\n    transactionStatus,\n    paymentType,\n    fraudStatus,\n    newStatus,\n    grossAmount,\n    transactionTime,\n    subscriptionId,\n    savedTokenId,\n    nextDueDateStr,\n    isSubscription: !!subscriptionId\n  }\n};"
+      },
+      "id": "process-notification",
+      "name": "Process Notification",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftExpression": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "sig-check",
+              "leftValue": "={{ $json.isValid }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "check-signature",
+      "name": "Signature Valid?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://gfcncubcurtnzupycwnf.supabase.co/rest/v1/rpc/update_payment_from_webhook",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "sb_publishable_Okvi7ubVn0xCZ89cS2Qedg_Xzf8AZwF"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": true,
+        "jsonBody": "={{ JSON.stringify({ p_order_id: $json.orderId, p_status: $json.newStatus, p_paid_at: $json.newStatus === 'paid' ? new Date().toISOString() : null, p_payment_method: $json.paymentType, p_next_due_date: $json.newStatus === 'paid' ? $json.nextDueDateStr : null, p_subscription_id: $json.subscriptionId || null }) }}",
+        "options": {}
+      },
+      "id": "update-supabase-payment",
+      "name": "Update Supabase Payment",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [660, -100]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{$env.TELEGRAM_BOT_TOKEN}}/sendMessage",
+        "sendBody": true,
+        "specifyBody": true,
+        "jsonBody": "={{ JSON.stringify({ chat_id: 7952165904, text: '💳 Midtrans Payment\\nOrder: ' + $json.orderId + '\\nStatus: ' + $json.newStatus + '\\nAmount: Rp ' + Number($json.grossAmount).toLocaleString('id-ID') + '\\nMethod: ' + $json.paymentType + ($json.subscriptionId ? '\\nSubscription: ' + $json.subscriptionId : ''), parse_mode: 'HTML' }) }}",
+        "options": {}
+      },
+      "id": "telegram-notify",
+      "name": "Telegram Notify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, -100]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'ok' }) }}"
+      },
+      "id": "respond-ok",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1100, -100]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'invalid_signature' }) }}"
+      },
+      "id": "respond-invalid",
+      "name": "Respond Invalid",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [660, 100]
+    }
+  ],
+  "connections": {
+    "Midtrans Webhook": {
+      "main": [
+        [
+          {
+            "node": "Process Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Notification": {
+      "main": [
+        [
+          {
+            "node": "Signature Valid?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Signature Valid?": {
+      "main": [
+        [
+          {
+            "node": "Update Supabase Payment",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Invalid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Supabase Payment": {
+      "main": [
+        [
+          {
+            "node": "Telegram Notify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Notify": {
+      "main": [
+        [
+          {
+            "node": "Respond OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

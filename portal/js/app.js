@@ -3,7 +3,20 @@ const SUPABASE_URL = 'https://gfcncubcurtnzupycwnf.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_Okvi7ubVn0xCZ89cS2Qedg_Xzf8AZwF';
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const COMMISSION = 0.15;
-const MIDTRANS_CLIENT_KEY = 'SB-Mid-client-6vBqP7mKfnRn2nLp';
+
+// Midtrans environment config — set MIDTRANS_ENV to 'production' for live payments
+const MIDTRANS_ENV = 'sandbox'; // 'sandbox' | 'production'
+const MIDTRANS_CONFIG = {
+  sandbox: {
+    clientKey: 'SB-Mid-client-6vBqP7mKfnRn2nLp',
+    snapUrl: 'https://app.sandbox.midtrans.com/snap/snap.js',
+  },
+  production: {
+    clientKey: 'SB-Mid-client-6vBqP7mKfnRn2nLp', // Replace with production key when going live
+    snapUrl: 'https://app.midtrans.com/snap/snap.js',
+  },
+};
+const MIDTRANS_CLIENT_KEY = MIDTRANS_CONFIG[MIDTRANS_ENV].clientKey;
 const SNAP_TOKEN_URL = 'https://n8n.rayantion.me/webhook/create-snap-token';
 
 // Domain extension pricing (IDR/year) based on IDWebhost reseller prices
@@ -28,6 +41,24 @@ const DOMAIN_NO_DOC = ['.web.id', '.id', '.my.id', '.biz.id', '.com', '.net', '.
 let currentUser = null;
 let userRole = 'client'; // 'client' | 'agent' | 'admin' | 'owner'
 let userLang = 'id';
+
+// Dynamically load Midtrans Snap SDK based on environment config
+function loadMidtransSDK() {
+  return new Promise((resolve, reject) => {
+    const existing = document.getElementById('midtrans-sdk-loader');
+    if (existing) existing.remove();
+    // Remove any previously loaded snap.js
+    const oldSnap = document.querySelector('script[src*="midtrans.com/snap/snap.js"]');
+    if (oldSnap) oldSnap.remove();
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = MIDTRANS_CONFIG[MIDTRANS_ENV].snapUrl;
+    script.setAttribute('data-client-key', MIDTRANS_CLIENT_KEY);
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('Failed to load Midtrans SDK'));
+    document.head.appendChild(script);
+  });
+}
 let logoutTimeout = null;
 
 function startLogoutTimeout() {
@@ -115,6 +146,9 @@ function updatePasswordStrength(password) {
 /* === DOM Ready === */
 document.addEventListener('DOMContentLoaded', async () => {
   await I18N.init('id');
+
+  // Load Midtrans Snap SDK dynamically
+  try { await loadMidtransSDK(); } catch(e) { console.warn('Midtrans SDK load failed:', e); }
 
   // Language pills (auth)
   document.querySelectorAll('#auth-lang-pills .lang-pill').forEach(pill => {
@@ -609,15 +643,37 @@ function renderClientPayments(payments) {
     // Action cell: Pay Now for pending payments
     const tdAction = document.createElement('td');
     if (p.status === 'pending') {
+      const wrap = document.createElement('div');
+      wrap.style.display = 'flex';
+      wrap.style.flexDirection = 'column';
+      wrap.style.gap = '0.3rem';
+      const select = document.createElement('select');
+      select.className = 'status-select';
+      select.style.background = 'rgba(99,102,241,0.1)';
+      select.style.color = '#818cf8';
+      select.style.fontSize = '0.75rem';
+      select.style.padding = '0.2rem 0.4rem';
+      select.style.borderRadius = '4px';
+      select.style.cursor = 'pointer';
+      const optSub = document.createElement('option');
+      optSub.value = 'subscription';
+      optSub.textContent = I18N.t('client.subscription') || 'Langganan';
+      const optOnce = document.createElement('option');
+      optOnce.value = 'one_time';
+      optOnce.textContent = I18N.t('client.one_time') || 'Sekali Bayar';
+      select.appendChild(optSub);
+      select.appendChild(optOnce);
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'btn-pay-now';
       btn.textContent = I18N.t('client.pay_now') || 'Bayar Sekarang';
-      btn.dataset.paymentId = p.id;
-      btn.dataset.amount = p.amount;
-      btn.dataset.websiteId = p.website_id || '';
-      btn.addEventListener('click', () => handlePayNow(p.id, p.amount, p.website_id));
-      tdAction.appendChild(btn);
+      btn.addEventListener('click', () => {
+        const isSub = select.value === 'subscription';
+        handlePayNow(p.id, p.amount, p.website_id, isSub);
+      });
+      wrap.appendChild(select);
+      wrap.appendChild(btn);
+      tdAction.appendChild(wrap);
     } else {
       tdAction.textContent = '—';
     }
@@ -660,7 +716,7 @@ function checkPaymentDueSoon() {
 }
 
 // Pay Now handler — Midtrans Snap integration via n8n proxy
-async function handlePayNow(paymentId, amount, websiteId) {
+async function handlePayNow(paymentId, amount, websiteId, isSubscription) {
   try {
     showLoading(I18N.t('loading'));
 
@@ -674,7 +730,7 @@ async function handlePayNow(paymentId, amount, websiteId) {
         amount: amount,
         client_name: currentUser?.user_metadata?.full_name || '',
         client_email: currentUser?.email || '',
-        is_subscription: true,
+        is_subscription: !!isSubscription,
       }),
     });
 
@@ -691,7 +747,7 @@ async function handlePayNow(paymentId, amount, websiteId) {
     if (!snap_token) throw new Error('No snap token received');
 
     // Store midtrans_order_id on the payment for webhook matching
-    await sb.from('payments').update({ midtrans_order_id: order_id }).eq('id', paymentId);
+    await sb.from('payments').update({ midtrans_order_id: order_id, is_subscription: !!isSubscription }).eq('id', paymentId);
 
     // Open Midtrans Snap popup
     window.snap.pay(snap_token, {

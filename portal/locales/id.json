@@ -81,6 +81,8 @@
     "website_requested": "Permintaan website dikirim!",
     "website_failed": "Gagal menambahkan website",
     "pay_now": "Bayar Sekarang",
+    "subscription": "Langganan",
+    "one_time": "Sekali Bayar",
     "confirm_pay": "Konfirmasi pembayaran manual? Admin akan memverifikasi.",
     "payment_recorded": "Pembayaran dicatat! Memverifikasi...",
     "payment_pending": "Pembayaran tertunda. Selesaikan pembayaran Anda.",
