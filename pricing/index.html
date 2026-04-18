@@ -1108,7 +1108,7 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => toggleFaq(btn));
 });
 
-// Scroll reveal
+function initReveal() {
   const els = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -1131,6 +1131,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // Handle lang switch from shared outer nav
 document.addEventListener('nav:lang', function(e) { switchLang(e.detail); });
+
+// Also wire up the page's own lang-btn buttons
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.getAttribute('data-lang');
+    if (lang) {
+      document.dispatchEvent(new CustomEvent('nav:lang', { detail: lang }));
+    }
+  });
+});
 
 </script>
 <script src="../js/shared-nav.js?v=30" defer></script>
